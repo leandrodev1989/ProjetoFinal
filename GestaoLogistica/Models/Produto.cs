@@ -8,8 +8,7 @@ namespace GestaoLogistica.Models
         [Key]
         public Guid FornecedorId { get; set; }
 
-       
-
+      
         [Required(ErrorMessage = "O Campo {0} é Obrigátorio")]
         [MaxLength(30, ErrorMessage = "O Número de Caracteres tem que ser Menor")]
         [DisplayName("Nome")]
@@ -22,11 +21,9 @@ namespace GestaoLogistica.Models
         [DisplayName("Descrição")]
         public string Descricao { get; set; }
 
-        public string Imagem { get; set; }
 
 
         [Required(ErrorMessage = "O Campo {0} é Obrigátorio")]
-        [MaxLength(30, ErrorMessage = "O Número de Caracteres tem que ser Menor")]
         [DisplayName("Valor")]
         public float Valor { get; set; }
 
@@ -40,9 +37,7 @@ namespace GestaoLogistica.Models
         [Required(ErrorMessage = "O Campo {0} é Obrigátorio")]
         public bool Ativo { get; set; }
 
-        /*  EF Relation */
-        //1 PARA N e 1 para Muitos
-        public Fornecedor  Fornecedor { get; set; }
 
+        
     }
 }

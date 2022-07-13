@@ -3,12 +3,13 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
+
 namespace GestaoLogistica.Models
 {
     public class Fornecedor : Entity
     {
         [Key]
-        public int Id {get; set;}
+        public Guid Id {get; set;}
 
         [Required(ErrorMessage = "O Campo {0} é Obrigátorio")]
         [MaxLength(50, ErrorMessage = "O Número de Caracteres tem que ser Menor")]
@@ -24,17 +25,23 @@ namespace GestaoLogistica.Models
         [Required(ErrorMessage = "O Campo {0} é Obrigátorio")]
         public TipoFornecedor  TipoFornecedor { get; set; }
 
-        [ForeignKey("EnderecoId")]
-        public Endereco Endereço { get; set; }
+        
+        public ICollection<Endereco> Endereço { get; set; } = new HashSet<Endereco>();
 
 
         [DisplayName("Ativo")]
         [Required(ErrorMessage = "O Campo {0} é Obrigátorio")]
         public bool Ativo{ get; set; }
 
-        /* EF Relation */
-
-        public IEnumerable<Produto> Produtos { get; set; }
+       
         
+    }
+
+
+
+    public enum TipoFornecedor : int
+    {
+        PessoaFisica = 1,
+        PessoaJuridica
     }
 }

@@ -56,7 +56,7 @@ namespace GestaoLogistica.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Placa,Datahora,Trasnportadora,Doca,QtdCaixas,Cubagem")] ConferirCarga conferirCarga)
+        public async Task<IActionResult> Create([Bind("Id,TipoOperacao,Placa,Datahora,Trasnportadora,Doca,QtdCaixas,Cubagem")] ConferirCarga conferirCarga)
         {
             if (ModelState.IsValid)
             {
@@ -88,7 +88,7 @@ namespace GestaoLogistica.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Placa,Datahora,Trasnportadora,Doca,QtdCaixas,Cubagem")] ConferirCarga conferirCarga)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,TipoOperacao,Placa,Datahora,Trasnportadora,Doca,QtdCaixas,Cubagem")] ConferirCarga conferirCarga)
         {
             if (id != conferirCarga.Id)
             {

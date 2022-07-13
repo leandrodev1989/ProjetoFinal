@@ -10,16 +10,16 @@ using GestaoLogistica.Models;
 
 namespace GestaoLogistica.Controllers
 {
-    public class ProdutosController : Controller
+    public class ProdutoesController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public ProdutosController(ApplicationDbContext context)
+        public ProdutoesController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: Produtos
+        // GET: Produtoes
         public async Task<IActionResult> Index()
         {
               return _context.Produtos != null ? 
@@ -27,7 +27,7 @@ namespace GestaoLogistica.Controllers
                           Problem("Entity set 'ApplicationDbContext.Produtos'  is null.");
         }
 
-        // GET: Produtos/Details/5
+        // GET: Produtoes/Details/5
         public async Task<IActionResult> Details(Guid? id)
         {
             if (id == null || _context.Produtos == null)
@@ -45,18 +45,18 @@ namespace GestaoLogistica.Controllers
             return View(produto);
         }
 
-        // GET: Produtos/Create
+        // GET: Produtoes/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Produtos/Create
+        // POST: Produtoes/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("FornecedorId,Nome,Descricao,Imagem,Valor,Datacadastro,Ativo")] Produto produto)
+        public async Task<IActionResult> Create([Bind("FornecedorId,Nome,Descricao,Valor,Datacadastro,Ativo")] Produto produto)
         {
             if (ModelState.IsValid)
             {
@@ -68,7 +68,7 @@ namespace GestaoLogistica.Controllers
             return View(produto);
         }
 
-        // GET: Produtos/Edit/5
+        // GET: Produtoes/Edit/5
         public async Task<IActionResult> Edit(Guid? id)
         {
             if (id == null || _context.Produtos == null)
@@ -84,12 +84,12 @@ namespace GestaoLogistica.Controllers
             return View(produto);
         }
 
-        // POST: Produtos/Edit/5
+        // POST: Produtoes/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("FornecedorId,Nome,Descricao,Imagem,Valor,Datacadastro,Ativo")] Produto produto)
+        public async Task<IActionResult> Edit(Guid id, [Bind("FornecedorId,Nome,Descricao,Valor,Datacadastro,Ativo")] Produto produto)
         {
             if (id != produto.FornecedorId)
             {
@@ -119,7 +119,7 @@ namespace GestaoLogistica.Controllers
             return View(produto);
         }
 
-        // GET: Produtos/Delete/5
+        // GET: Produtoes/Delete/5
         public async Task<IActionResult> Delete(Guid? id)
         {
             if (id == null || _context.Produtos == null)
@@ -137,7 +137,7 @@ namespace GestaoLogistica.Controllers
             return View(produto);
         }
 
-        // POST: Produtos/Delete/5
+        // POST: Produtoes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)

@@ -7,7 +7,7 @@ namespace GestaoLogistica.Models
     public class Conferente : Entity
     {
         [Key]
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         [Required(ErrorMessage = "O Campo {0} é Obrigátorio")]
         [MaxLength(30, ErrorMessage = "O Número de Caracteres tem que ser Menor")]

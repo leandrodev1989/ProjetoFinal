@@ -1,14 +1,16 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GestaoLogistica.Models
 {
     public class Endereco : Entity
     {
-        public Guid FornecedorId { get; set; }
+      
+
 
         [Key]
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         [Required(ErrorMessage = "O Campo {0} é Obrigátorio")]
         [MaxLength(50, ErrorMessage = "O Número de Caracteres tem que ser Menor")]
@@ -59,8 +61,8 @@ namespace GestaoLogistica.Models
         public string  Estado { get; set; }
 
         /* EF Relation */
-        //1 para 1
+
         
-        public Fornecedor Fornecedor { get; set; }
+        public ICollection<Fornecedor> Fornecedor { get; set; } = new List<Fornecedor>();
     }
 }

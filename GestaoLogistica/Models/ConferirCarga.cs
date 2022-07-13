@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using GestaoLogistica.Enums;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -6,10 +7,13 @@ namespace GestaoLogistica.Models
 {
     public class ConferirCarga : Entity
     {
+
         [Key]
         public int Id { get; set; }
 
-
+        [Required(ErrorMessage = "O Campo {0} é Obrigátorio")]
+        [DisplayName("Tipo Operação")]
+        public string TipoOperacao { get; set; }
 
         [Required(ErrorMessage = "O Campo {0} é Obrigátorio")]
         [MaxLength(20, ErrorMessage = "O Número de Caracteres tem que ser Menor")]
@@ -32,7 +36,6 @@ namespace GestaoLogistica.Models
 
 
         [Required(ErrorMessage = "O Campo {0} é Obrigátorio")]
-        [MaxLength(20, ErrorMessage = "O Número de Caracteres tem que ser Menor")]
         [DisplayName("Doca")]
         public int Doca { get; set; }
 
@@ -45,14 +48,11 @@ namespace GestaoLogistica.Models
 
 
         [Required(ErrorMessage = "O Campo {0} é Obrigátorio")]
-        [MaxLength(15, ErrorMessage = "O Número de Caracteres tem que ser Menor")]
         [DisplayName("Cubagem")]
-        public double Cubagem { get; set; }
+        public int Cubagem { get; set; }
 
-        /*  EF Relation */
-        //1 PARA N e 1 para Muitos
-        [ForeignKey("ConferenteId")]
-        public Conferente Conferente { get; set; }
+       
+        public ICollection<Conferente> Conferentes { get; set; } = new HashSet<Conferente>();
 
     }
 }

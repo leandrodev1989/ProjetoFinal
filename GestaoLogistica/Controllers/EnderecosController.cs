@@ -28,7 +28,7 @@ namespace GestaoLogistica.Controllers
         }
 
         // GET: Enderecos/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(Guid? id)
         {
             if (id == null || _context.Enderecos == null)
             {
@@ -56,10 +56,11 @@ namespace GestaoLogistica.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("FornecedorId,Id,Logradouro,Numero,Complemento,Cep,Bairro,Cidade,Estado")] Endereco endereco)
+        public async Task<IActionResult> Create([Bind("Id,Logradouro,Numero,Complemento,Cep,Bairro,Cidade,Estado")] Endereco endereco)
         {
             if (ModelState.IsValid)
             {
+                endereco.Id = Guid.NewGuid();
                 _context.Add(endereco);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -68,7 +69,7 @@ namespace GestaoLogistica.Controllers
         }
 
         // GET: Enderecos/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(Guid? id)
         {
             if (id == null || _context.Enderecos == null)
             {
@@ -88,7 +89,7 @@ namespace GestaoLogistica.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("FornecedorId,Id,Logradouro,Numero,Complemento,Cep,Bairro,Cidade,Estado")] Endereco endereco)
+        public async Task<IActionResult> Edit(Guid id, [Bind("Id,Logradouro,Numero,Complemento,Cep,Bairro,Cidade,Estado")] Endereco endereco)
         {
             if (id != endereco.Id)
             {
@@ -119,7 +120,7 @@ namespace GestaoLogistica.Controllers
         }
 
         // GET: Enderecos/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(Guid? id)
         {
             if (id == null || _context.Enderecos == null)
             {
@@ -139,7 +140,7 @@ namespace GestaoLogistica.Controllers
         // POST: Enderecos/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
             if (_context.Enderecos == null)
             {
@@ -155,7 +156,7 @@ namespace GestaoLogistica.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool EnderecoExists(int id)
+        private bool EnderecoExists(Guid id)
         {
           return (_context.Enderecos?.Any(e => e.Id == id)).GetValueOrDefault();
         }

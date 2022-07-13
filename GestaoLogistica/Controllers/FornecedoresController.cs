@@ -28,7 +28,7 @@ namespace GestaoLogistica.Controllers
         }
 
         // GET: Fornecedores/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(Guid? id)
         {
             if (id == null || _context.Fornecedores == null)
             {
@@ -60,6 +60,7 @@ namespace GestaoLogistica.Controllers
         {
             if (ModelState.IsValid)
             {
+                fornecedor.Id = Guid.NewGuid();
                 _context.Add(fornecedor);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -68,7 +69,7 @@ namespace GestaoLogistica.Controllers
         }
 
         // GET: Fornecedores/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(Guid? id)
         {
             if (id == null || _context.Fornecedores == null)
             {
@@ -88,7 +89,7 @@ namespace GestaoLogistica.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nome,Documento,TipoFornecedor,Ativo")] Fornecedor fornecedor)
+        public async Task<IActionResult> Edit(Guid id, [Bind("Id,Nome,Documento,TipoFornecedor,Ativo")] Fornecedor fornecedor)
         {
             if (id != fornecedor.Id)
             {
@@ -119,7 +120,7 @@ namespace GestaoLogistica.Controllers
         }
 
         // GET: Fornecedores/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(Guid? id)
         {
             if (id == null || _context.Fornecedores == null)
             {
@@ -139,7 +140,7 @@ namespace GestaoLogistica.Controllers
         // POST: Fornecedores/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
             if (_context.Fornecedores == null)
             {
@@ -155,7 +156,7 @@ namespace GestaoLogistica.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool FornecedorExists(int id)
+        private bool FornecedorExists(Guid id)
         {
           return (_context.Fornecedores?.Any(e => e.Id == id)).GetValueOrDefault();
         }

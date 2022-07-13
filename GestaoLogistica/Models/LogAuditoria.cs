@@ -8,17 +8,18 @@ namespace GestaoLogistica.Models
     public class LogAuditoria : Entity
     {
 
-
         [Key]
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
-        [Column("DetalhesAuditoria")]
-        [Display(Name = "Detalhes Auditoria")]
+        
+        [DisplayName ("Detalhes Auditoria")]
         public string DetalhesAuditoria { get; set; }
 
-        [ForeignKey("EmailUsuario")]
-        [Display(Name = "Email Usuario")]
+       
+        [DisplayName ("Email Usuario")]
         public string EmailUsuario { get; set; }
-        public Conferente Conferente { get; set; }
+
+        public List<Conferente> Conferentes { get; set; }
+
     }
 }
