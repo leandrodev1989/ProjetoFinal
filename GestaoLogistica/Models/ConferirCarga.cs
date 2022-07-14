@@ -6,17 +6,15 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace GestaoLogistica.Models
 {
     public class ConferirCarga : Entity
-    {
-
-        [Key]
-        public int Id { get; set; }
+    {     
+        public Guid ConferenteId { get; set; }   
 
         [Required(ErrorMessage = "O Campo {0} é Obrigátorio")]
         [DisplayName("Tipo Operação")]
-        public string TipoOperacao { get; set; }
+        public TipoOperacao TipoOperacao { get; set; }
 
         [Required(ErrorMessage = "O Campo {0} é Obrigátorio")]
-        [MaxLength(20, ErrorMessage = "O Número de Caracteres tem que ser Menor")]
+        [StringLength(7, ErrorMessage = "O Campo {0} precisa ter 7 Caracteres ")]
         [DisplayName("Placa")]
         public string Placa { get; set ; }
 
@@ -26,13 +24,10 @@ namespace GestaoLogistica.Models
         [DisplayName("Data Hora inicio")]
         public DateTime Datahora { get; set; }
 
-
-
         [Required(ErrorMessage = "O Campo {0} é Obrigátorio")]
-        [MaxLength(20, ErrorMessage = "O Número de Caracteres tem que ser Menor")]
+        [StringLength(100, ErrorMessage = "O Campo {0} precisa ter no Maximo {1} Caracteres ")]
         [DisplayName("Transportadora")]
         public string Trasnportadora { get; set; }
-
 
 
         [Required(ErrorMessage = "O Campo {0} é Obrigátorio")]
@@ -46,13 +41,23 @@ namespace GestaoLogistica.Models
         public int QtdCaixas { get; set; }
 
 
-
         [Required(ErrorMessage = "O Campo {0} é Obrigátorio")]
         [DisplayName("Cubagem")]
         public int Cubagem { get; set; }
 
-       
-        public ICollection<Conferente> Conferentes { get; set; } = new HashSet<Conferente>();
+        /* Relation */
+        /// <summary>
+        /// Relacionamento 1 para Muitos
+        /// </summary>
+        public Conferente Conferente { get; set; }
 
+
+    }
+
+
+    public enum TipoOperacao
+    {
+        Expedicao = 1,
+        Recebimento
     }
 }

@@ -7,9 +7,8 @@ namespace GestaoLogistica.Models
     [Table("LogAuditoria")]
     public class LogAuditoria : Entity
     {
-
-        [Key]
-        public Guid Id { get; set; }
+    
+        public Guid ConferenteId { get; set; }
 
         
         [DisplayName ("Detalhes Auditoria")]
@@ -19,7 +18,8 @@ namespace GestaoLogistica.Models
         [DisplayName ("Email Usuario")]
         public string EmailUsuario { get; set; }
 
-        public List<Conferente> Conferentes { get; set; }
+        /* Relation */
+        public Conferente Conferente { get; set; }      
 
     }
 }

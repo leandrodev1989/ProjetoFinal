@@ -4,30 +4,29 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GestaoLogistica.Models
 {
+    [Table("Endereco")]
     public class Endereco : Entity
     {
-      
 
 
-        [Key]
-        public Guid Id { get; set; }
+        public Guid FornecedorId { get; set; }
 
         [Required(ErrorMessage = "O Campo {0} é Obrigátorio")]
-        [MaxLength(50, ErrorMessage = "O Número de Caracteres tem que ser Menor")]
+        [StringLength(200, ErrorMessage = "O Campo {0} precisa ter entre ", MinimumLength = 2)]
         [DisplayName("Logradouro")]
         public string Logradouro { get; set; }
 
 
 
         [Required(ErrorMessage = "O Campo {0} é Obrigátorio")]
-        [MaxLength(100, ErrorMessage = "O Número de Caracteres tem que ser Menor")]
+        [StringLength(100, ErrorMessage = "O Campo {0} precisa ter entre ", MinimumLength = 2)]
         [DisplayName("Numero")]
         public string Numero { get; set; }
 
 
 
         [Required(ErrorMessage = "O Campo {0} é Obrigátorio")]
-        [MaxLength(50, ErrorMessage = "O Número de Caracteres tem que ser Menor")]
+        [StringLength(200, ErrorMessage = "O Campo {0} precisa ter entre ", MinimumLength = 2)]
         [DisplayName("Complemento")]
         public string Complemento { get; set; }
 
@@ -35,34 +34,35 @@ namespace GestaoLogistica.Models
 
 
         [Required(ErrorMessage = "O Campo {0} é Obrigátorio")]
-        [MaxLength(8, ErrorMessage = "O Número de Caracteres tem que ser Menor")]
-        [DisplayName("Descrição")]
-        public string  Cep { get; set; }
+        [StringLength(11, ErrorMessage = "O Campo {0} precisa ter entre ", MinimumLength = 2)]
+        [DisplayName("Cep")]
+        public string Cep { get; set; }
 
 
 
         [Required(ErrorMessage = "O Campo {0} é Obrigátorio")]
-        [MaxLength(50, ErrorMessage = "O Número de Caracteres tem que ser Menor")]
-        [DisplayName("Bairro")]
-        public string  Bairro { get; set; }
+        [StringLength(100, ErrorMessage = "O Campo {0} precisa ter entre ", MinimumLength = 2)]
+        public string Bairro { get; set; }
 
 
 
         [Required(ErrorMessage = "O Campo {0} é Obrigátorio")]
-        [MaxLength(20, ErrorMessage = "O Número de Caracteres tem que ser Menor")]
+        [StringLength(50, ErrorMessage = "O Campo {0} precisa ter entre ", MinimumLength = 2)]
         [DisplayName("Cidade")]
-        public string  Cidade{ get; set; }
+        public string Cidade { get; set; }
 
 
 
         [Required(ErrorMessage = "O Campo {0} é Obrigátorio")]
-        [MaxLength(50, ErrorMessage = "O Número de Caracteres tem que ser Menor")]
-        [DisplayName("Descrição")]
-        public string  Estado { get; set; }
+        [StringLength(50, ErrorMessage = "O Campo {0} precisa ter entre ", MinimumLength = 2)]
+        [DisplayName("Estado")]
+        public string Estado { get; set; }
+
 
         /* EF Relation */
-
-        
-        public ICollection<Fornecedor> Fornecedor { get; set; } = new List<Fornecedor>();
+        /// <summary>
+        /// Relacionamneto 1 para 1
+        /// </summary>
+        public Fornecedor Fornecedor { get; set; }
     }
 }

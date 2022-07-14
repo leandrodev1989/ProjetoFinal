@@ -51,21 +51,19 @@ namespace GestaoLogistica.Controllers
             return View();
         }
 
-        // POST: Conferentes/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+      
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nome,Cpf,Email,Turno,Setor")] Conferente conferente)
+        public async Task<IActionResult> Create( Conferente conferente)
         {
-            if (ModelState.IsValid)
-            {
+           
+            
                 conferente.Id = Guid.NewGuid();
                 _context.Add(conferente);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
-            }
-            return View(conferente);
+            
+                return View(conferente);
         }
 
         // GET: Conferentes/Edit/5
@@ -84,20 +82,18 @@ namespace GestaoLogistica.Controllers
             return View(conferente);
         }
 
-        // POST: Conferentes/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("Id,Nome,Cpf,Email,Turno,Setor")] Conferente conferente)
+        public async Task<IActionResult> Edit(Guid id, Conferente conferente)
         {
             if (id != conferente.Id)
             {
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
-            {
+           
+            
                 try
                 {
                     _context.Update(conferente);
@@ -115,7 +111,7 @@ namespace GestaoLogistica.Controllers
                     }
                 }
                 return RedirectToAction(nameof(Index));
-            }
+            
             return View(conferente);
         }
 

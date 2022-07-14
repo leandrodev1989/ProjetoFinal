@@ -22,9 +22,8 @@ namespace GestaoLogistica.Controllers
         // GET: Enderecos
         public async Task<IActionResult> Index()
         {
-              return _context.Enderecos != null ? 
-                          View(await _context.Enderecos.ToListAsync()) :
-                          Problem("Entity set 'ApplicationDbContext.Enderecos'  is null.");
+            var applicationDbContext = _context.Enderecos.Include(e => e.Fornecedor);
+            return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: Enderecos/Details/5
@@ -36,6 +35,7 @@ namespace GestaoLogistica.Controllers
             }
 
             var endereco = await _context.Enderecos
+                .Include(e => e.Fornecedor)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (endereco == null)
             {
@@ -48,6 +48,7 @@ namespace GestaoLogistica.Controllers
         // GET: Enderecos/Create
         public IActionResult Create()
         {
+            ViewData["FornecedorId"] = new SelectList(_context.Fornecedores, "Id", "Documento");
             return View();
         }
 
@@ -56,15 +57,16 @@ namespace GestaoLogistica.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Logradouro,Numero,Complemento,Cep,Bairro,Cidade,Estado")] Endereco endereco)
+        public async Task<IActionResult> Create( Endereco endereco)
         {
-            if (ModelState.IsValid)
-            {
+            
+            
                 endereco.Id = Guid.NewGuid();
                 _context.Add(endereco);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
-            }
+            
+            ViewData["FornecedorId"] = new SelectList(_context.Fornecedores, "Id", "Documento", endereco.FornecedorId);
             return View(endereco);
         }
 
@@ -81,6 +83,7 @@ namespace GestaoLogistica.Controllers
             {
                 return NotFound();
             }
+            ViewData["FornecedorId"] = new SelectList(_context.Fornecedores, "Id", "Documento", endereco.FornecedorId);
             return View(endereco);
         }
 
@@ -89,15 +92,15 @@ namespace GestaoLogistica.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("Id,Logradouro,Numero,Complemento,Cep,Bairro,Cidade,Estado")] Endereco endereco)
+        public async Task<IActionResult> Edit(Guid id,  Endereco endereco)
         {
             if (id != endereco.Id)
             {
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
-            {
+           
+            
                 try
                 {
                     _context.Update(endereco);
@@ -115,7 +118,8 @@ namespace GestaoLogistica.Controllers
                     }
                 }
                 return RedirectToAction(nameof(Index));
-            }
+            
+            ViewData["FornecedorId"] = new SelectList(_context.Fornecedores, "Id", "Documento", endereco.FornecedorId);
             return View(endereco);
         }
 
@@ -128,6 +132,7 @@ namespace GestaoLogistica.Controllers
             }
 
             var endereco = await _context.Enderecos
+                .Include(e => e.Fornecedor)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (endereco == null)
             {

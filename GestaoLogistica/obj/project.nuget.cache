@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "Guos/rdGKPCJVcAe2i4vfejHda11NkCuNVz6BjCkeHu2FQtzTjEueXW+va+JM13a5Vccrjbk/xrEuL6XidSW6w==",
+  "dgSpecHash": "8q4KFR0YZOsb1/l9+kiJCOmls5MN3voQvOEJ/nxkH3MQ9gw1LvXNfok3Afaq15jkkCktKICKPSq1hfSjaQH29Q==",
   "success": true,
   "projectFilePath": "C:\\Users\\Usuário\\Estudos\\GestaoLogistica\\GestaoLogistica.csproj",
   "expectedPackageFiles": [
@@ -8,6 +8,8 @@
     "C:\\Users\\Usuário\\.nuget\\packages\\messagepack\\2.1.152\\messagepack.2.1.152.nupkg.sha512",
     "C:\\Users\\Usuário\\.nuget\\packages\\messagepack.annotations\\2.1.152\\messagepack.annotations.2.1.152.nupkg.sha512",
     "C:\\Users\\Usuário\\.nuget\\packages\\messagepackanalyzer\\2.1.152\\messagepackanalyzer.2.1.152.nupkg.sha512",
+    "C:\\Users\\Usuário\\.nuget\\packages\\microsoft.aspnet.identity.core\\2.2.3\\microsoft.aspnet.identity.core.2.2.3.nupkg.sha512",
+    "C:\\Users\\Usuário\\.nuget\\packages\\microsoft.aspnet.identity.core.pt-br\\2.2.3\\microsoft.aspnet.identity.core.pt-br.2.2.3.nupkg.sha512",
     "C:\\Users\\Usuário\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\6.0.6\\microsoft.aspnetcore.cryptography.internal.6.0.6.nupkg.sha512",
     "C:\\Users\\Usuário\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\6.0.6\\microsoft.aspnetcore.cryptography.keyderivation.6.0.6.nupkg.sha512",
     "C:\\Users\\Usuário\\.nuget\\packages\\microsoft.aspnetcore.diagnostics.entityframeworkcore\\6.0.5\\microsoft.aspnetcore.diagnostics.entityframeworkcore.6.0.5.nupkg.sha512",
@@ -191,5 +193,26 @@
     "C:\\Users\\Usuário\\.nuget\\packages\\system.xml.readerwriter\\4.3.0\\system.xml.readerwriter.4.3.0.nupkg.sha512",
     "C:\\Users\\Usuário\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'Microsoft.AspNet.Identity.Core 2.2.3' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework 'net6.0'. This package may not be fully compatible with your project.",
+      "libraryId": "Microsoft.AspNet.Identity.Core",
+      "targetGraphs": [
+        "net6.0"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'Microsoft.AspNet.Identity.Core.pt-br 2.2.3' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework 'net6.0'. This package may not be fully compatible with your project.",
+      "libraryId": "Microsoft.AspNet.Identity.Core.pt-br",
+      "targetGraphs": [
+        "net6.0"
+      ]
+    }
+  ]
 }

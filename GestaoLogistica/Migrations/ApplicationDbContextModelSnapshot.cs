@@ -22,29 +22,11 @@ namespace GestaoLogistica.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("EnderecoFornecedor", b =>
-                {
-                    b.Property<Guid>("EndereçoId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("FornecedorId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("EndereçoId", "FornecedorId");
-
-                    b.HasIndex("FornecedorId");
-
-                    b.ToTable("EnderecoFornecedor");
-                });
-
             modelBuilder.Entity("GestaoLogistica.Models.Conferente", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<int?>("ConferirCargaId")
-                        .HasColumnType("int");
 
                     b.Property<string>("Cpf")
                         .IsRequired()
@@ -54,9 +36,6 @@ namespace GestaoLogistica.Migrations
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid?>("LogAuditoriaId")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Nome")
                         .IsRequired()
@@ -74,20 +53,17 @@ namespace GestaoLogistica.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ConferirCargaId");
-
-                    b.HasIndex("LogAuditoriaId");
-
                     b.ToTable("Conferentes");
                 });
 
             modelBuilder.Entity("GestaoLogistica.Models.ConferirCarga", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("uniqueidentifier");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    b.Property<Guid>("ConferenteId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("Cubagem")
                         .HasColumnType("int");
@@ -106,9 +82,8 @@ namespace GestaoLogistica.Migrations
                     b.Property<int>("QtdCaixas")
                         .HasColumnType("int");
 
-                    b.Property<string>("TipoOperacao")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("TipoOperacao")
+                        .HasColumnType("int");
 
                     b.Property<string>("Trasnportadora")
                         .IsRequired()
@@ -116,6 +91,8 @@ namespace GestaoLogistica.Migrations
                         .HasColumnType("nvarchar(20)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ConferenteId");
 
                     b.ToTable("ConferirCarga");
                 });
@@ -151,6 +128,9 @@ namespace GestaoLogistica.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<Guid>("FornecedorId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("Logradouro")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -163,7 +143,9 @@ namespace GestaoLogistica.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Enderecos");
+                    b.HasIndex("FornecedorId");
+
+                    b.ToTable("Endereco");
                 });
 
             modelBuilder.Entity("GestaoLogistica.Models.Fornecedor", b =>
@@ -199,6 +181,9 @@ namespace GestaoLogistica.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid>("ConferenteId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("DetalhesAuditoria")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -209,35 +194,50 @@ namespace GestaoLogistica.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ConferenteId");
+
                     b.ToTable("LogAuditoria");
                 });
 
             modelBuilder.Entity("GestaoLogistica.Models.Produto", b =>
                 {
-                    b.Property<Guid>("FornecedorId")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<bool>("Ativo")
                         .HasColumnType("bit");
 
+                    b.Property<Guid?>("ConferenteId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<DateTime>("Datacadastro")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Descricao")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<int>("Estoque")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("FornecedorId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
 
-                    b.Property<float>("Valor")
-                        .HasColumnType("real");
+                    b.Property<decimal>("Valor")
+                        .HasColumnType("decimal(18,2)");
 
-                    b.HasKey("FornecedorId");
+                    b.HasKey("Id");
+
+                    b.HasIndex("ConferenteId");
+
+                    b.HasIndex("FornecedorId");
 
                     b.ToTable("Produtos");
                 });
@@ -444,30 +444,52 @@ namespace GestaoLogistica.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("EnderecoFornecedor", b =>
+            modelBuilder.Entity("GestaoLogistica.Models.ConferirCarga", b =>
                 {
-                    b.HasOne("GestaoLogistica.Models.Endereco", null)
+                    b.HasOne("GestaoLogistica.Models.Conferente", "Conferente")
                         .WithMany()
-                        .HasForeignKey("EndereçoId")
+                        .HasForeignKey("ConferenteId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("GestaoLogistica.Models.Fornecedor", null)
+                    b.Navigation("Conferente");
+                });
+
+            modelBuilder.Entity("GestaoLogistica.Models.Endereco", b =>
+                {
+                    b.HasOne("GestaoLogistica.Models.Fornecedor", "Fornecedor")
                         .WithMany()
                         .HasForeignKey("FornecedorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Fornecedor");
                 });
 
-            modelBuilder.Entity("GestaoLogistica.Models.Conferente", b =>
+            modelBuilder.Entity("GestaoLogistica.Models.LogAuditoria", b =>
                 {
-                    b.HasOne("GestaoLogistica.Models.ConferirCarga", null)
-                        .WithMany("Conferentes")
-                        .HasForeignKey("ConferirCargaId");
+                    b.HasOne("GestaoLogistica.Models.Conferente", "Conferente")
+                        .WithMany()
+                        .HasForeignKey("ConferenteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasOne("GestaoLogistica.Models.LogAuditoria", null)
-                        .WithMany("Conferentes")
-                        .HasForeignKey("LogAuditoriaId");
+                    b.Navigation("Conferente");
+                });
+
+            modelBuilder.Entity("GestaoLogistica.Models.Produto", b =>
+                {
+                    b.HasOne("GestaoLogistica.Models.Conferente", null)
+                        .WithMany("Produtos")
+                        .HasForeignKey("ConferenteId");
+
+                    b.HasOne("GestaoLogistica.Models.Fornecedor", "Fornecedor")
+                        .WithMany("Produtos")
+                        .HasForeignKey("FornecedorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Fornecedor");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -521,14 +543,14 @@ namespace GestaoLogistica.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("GestaoLogistica.Models.ConferirCarga", b =>
+            modelBuilder.Entity("GestaoLogistica.Models.Conferente", b =>
                 {
-                    b.Navigation("Conferentes");
+                    b.Navigation("Produtos");
                 });
 
-            modelBuilder.Entity("GestaoLogistica.Models.LogAuditoria", b =>
+            modelBuilder.Entity("GestaoLogistica.Models.Fornecedor", b =>
                 {
-                    b.Navigation("Conferentes");
+                    b.Navigation("Produtos");
                 });
 #pragma warning restore 612, 618
         }

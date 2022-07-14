@@ -1,3 +1,12 @@
 ﻿namespace GestaoLogistica.Enums
 {
+     
 }
+
+
+
+
+   
+
+
+                 

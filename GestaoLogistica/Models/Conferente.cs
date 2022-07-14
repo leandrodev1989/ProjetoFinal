@@ -6,11 +6,10 @@ namespace GestaoLogistica.Models
 {
     public class Conferente : Entity
     {
-        [Key]
-        public Guid Id { get; set; }
+        
 
         [Required(ErrorMessage = "O Campo {0} é Obrigátorio")]
-        [MaxLength(30, ErrorMessage = "O Número de Caracteres tem que ser Menor")]
+        [StringLength(50, ErrorMessage = "O Campo {0} precisa ter entre ", MinimumLength = 2)]
         [DisplayName("Nome")]
         public string Nome { get; set; }
 
@@ -28,13 +27,21 @@ namespace GestaoLogistica.Models
 
 
         [Required(ErrorMessage = "O Campo {0} é Obrigátorio")]
-        [StringLength(10)]
+        [StringLength(50, ErrorMessage = "O Campo {0} precisa ter entre ", MinimumLength = 6)]
         [DisplayName("Turno")]
         public string Turno { get; set; }
 
 
         [Required(ErrorMessage = "O Campo {0} é Obrigátorio")]
+        [StringLength(30, ErrorMessage = "O Campo {0} precisa ter entre ", MinimumLength = 6)]
         [DisplayName("Setor")]
         public string Setor { get; set; }
+
+
+        /* EF Relation */
+        /// <summary>
+        /// Relacionamento 1 para Muitos Com Produtos
+        /// </summary>
+        public IEnumerable<Produto> Produtos { get; set; }
     }
 }

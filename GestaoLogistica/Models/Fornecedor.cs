@@ -8,32 +8,33 @@ namespace GestaoLogistica.Models
 {
     public class Fornecedor : Entity
     {
-        [Key]
-        public Guid Id {get; set;}
+       
 
         [Required(ErrorMessage = "O Campo {0} é Obrigátorio")]
-        [MaxLength(50, ErrorMessage = "O Número de Caracteres tem que ser Menor")]
+        [StringLength(50, ErrorMessage = "O Campo {0} precisa ter entre ", MinimumLength = 2)]
         [DisplayName("Nome")]
         public string Nome { get; set; }
 
 
         [Required(ErrorMessage = "O Campo {0} é Obrigátorio")]
-        [MaxLength(50, ErrorMessage = "O Número de Caracteres tem que ser Menor")]
+        [MaxLength(14, ErrorMessage = "O Número de Caracteres tem que ser Menor")]
         [DisplayName("Documento")]
         public string Documento { get; set; }
 
         [Required(ErrorMessage = "O Campo {0} é Obrigátorio")]
         public TipoFornecedor  TipoFornecedor { get; set; }
 
-        
-        public ICollection<Endereco> Endereço { get; set; } = new HashSet<Endereco>();
-
 
         [DisplayName("Ativo")]
         [Required(ErrorMessage = "O Campo {0} é Obrigátorio")]
         public bool Ativo{ get; set; }
 
-       
+        
+        /* EF Relation */
+        /// <summary>
+        /// Relacionamento 1 para Muitos Com Produtos
+        /// </summary>
+        public IEnumerable<Produto> Produtos { get; set; }
         
     }
 

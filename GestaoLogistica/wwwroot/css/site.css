@@ -14,5 +14,15 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    background-image: url('../image/log.jpg');
+    background-size:cover;
+    background-repeat: repeat;
+
 }
+
+footer
+{
+    text-align:center;
+}
+
