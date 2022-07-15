@@ -59,7 +59,7 @@ namespace GestaoLogistica.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create( Produto produto)
         {
-           
+            
             
                 produto.Id = Guid.NewGuid();
                 _context.Add(produto);
@@ -92,14 +92,14 @@ namespace GestaoLogistica.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id,  Produto produto)
+        public async Task<IActionResult> Edit(Guid id, Produto produto)
         {
             if (id != produto.Id)
             {
                 return NotFound();
             }
 
-            
+           
             
                 try
                 {

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using DevIO.App.Extensions;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace GestaoLogistica.Models
@@ -20,12 +21,13 @@ namespace GestaoLogistica.Models
 
         [Required(ErrorMessage = "O Campo {0} é Obrigátorio")]    
         [DisplayName("Estoque")]
-        [StringLength(50, ErrorMessage = "O Campo {0} precisa ter entre ", MinimumLength = 2)]
+        
         public int  Estoque { get; set; }
 
+        [Moeda]
         [Required(ErrorMessage = "O Campo {0} é Obrigátorio")]
         [DisplayName("Valor")]
-        public decimal Valor { get; set; }
+        public Decimal Valor { get; set; }
 
         [Required(ErrorMessage = "O Campo {0} é Obrigátorio")]
         [DataType(DataType.DateTime)]
@@ -41,6 +43,8 @@ namespace GestaoLogistica.Models
         /// Relacionamneto 1 para Muitos
         /// </summary>
         public Fornecedor Fornecedor { get; set; }
+
+
 
         
     }

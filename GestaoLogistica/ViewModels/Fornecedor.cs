@@ -8,7 +8,8 @@ namespace GestaoLogistica.Models
 {
     public class Fornecedor : Entity
     {
-       
+        [Key]
+        public Guid Id { get; set; }
 
         [Required(ErrorMessage = "O Campo {0} é Obrigátorio")]
         [StringLength(50, ErrorMessage = "O Campo {0} precisa ter entre ", MinimumLength = 2)]

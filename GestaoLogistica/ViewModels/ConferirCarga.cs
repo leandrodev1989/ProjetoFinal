@@ -6,7 +6,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace GestaoLogistica.Models
 {
     public class ConferirCarga : Entity
-    {     
+    {
+        
+
         public Guid ConferenteId { get; set; }   
 
         [Required(ErrorMessage = "O Campo {0} é Obrigátorio")]
@@ -51,6 +53,9 @@ namespace GestaoLogistica.Models
         /// </summary>
         public Conferente Conferente { get; set; }
 
+
+
+      
 
     }
 

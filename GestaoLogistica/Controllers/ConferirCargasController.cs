@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using GestaoLogistica.Data;
+using GestaoLogistica.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using GestaoLogistica.Data;
-using GestaoLogistica.Models;
 
 namespace GestaoLogistica.Controllers
 {
@@ -52,18 +48,19 @@ namespace GestaoLogistica.Controllers
             return View();
         }
 
-        // POST: ConferirCargas/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create( ConferirCarga conferirCarga)
         {
-          
-            
-                conferirCarga.Id = Guid.NewGuid();
+            int altura = 50, comprimento = 50, profundidade  = 50;
+
+            float convert =  ((float)altura *  comprimento * profundidade);
+
+            conferirCarga.Id = Guid.NewGuid();
                 _context.Add(conferirCarga);
-                await _context.SaveChangesAsync();
+             conferirCarga.Cubagem = conferirCarga.QtdCaixas * (altura * comprimento * profundidade );
+            await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             
             ViewData["ConferenteId"] = new SelectList(_context.Conferentes, "Id", "Cpf", conferirCarga.ConferenteId);

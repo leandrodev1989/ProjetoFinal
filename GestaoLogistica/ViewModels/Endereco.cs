@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -8,7 +9,7 @@ namespace GestaoLogistica.Models
     public class Endereco : Entity
     {
 
-
+      
         public Guid FornecedorId { get; set; }
 
         [Required(ErrorMessage = "O Campo {0} é Obrigátorio")]
