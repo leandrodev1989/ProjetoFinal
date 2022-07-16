@@ -80,6 +80,19 @@ namespace GestaoLogistica.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "LogAuditorias",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    DetalhesAuditoria = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    EmailUsuario = table.Column<string>(name: "Email Usuario", type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_LogAuditorias", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -211,26 +224,6 @@ namespace GestaoLogistica.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "LogAuditoria",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ConferenteId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    DetalhesAuditoria = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    EmailUsuario = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_LogAuditoria", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_LogAuditoria_Conferentes_ConferenteId",
-                        column: x => x.ConferenteId,
-                        principalTable: "Conferentes",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Endereco",
                 columns: table => new
                 {
@@ -263,7 +256,7 @@ namespace GestaoLogistica.Migrations
                     FornecedorId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Nome = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     Descricao = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: false),
-                    Estoque = table.Column<int>(type: "int", maxLength: 50, nullable: false),
+                    Estoque = table.Column<int>(type: "int", nullable: false),
                     Valor = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Datacadastro = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Ativo = table.Column<bool>(type: "bit", nullable: false),
@@ -335,11 +328,6 @@ namespace GestaoLogistica.Migrations
                 column: "FornecedorId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_LogAuditoria_ConferenteId",
-                table: "LogAuditoria",
-                column: "ConferenteId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Produtos_ConferenteId",
                 table: "Produtos",
                 column: "ConferenteId");
@@ -374,7 +362,7 @@ namespace GestaoLogistica.Migrations
                 name: "Endereco");
 
             migrationBuilder.DropTable(
-                name: "LogAuditoria");
+                name: "LogAuditorias");
 
             migrationBuilder.DropTable(
                 name: "Produtos");

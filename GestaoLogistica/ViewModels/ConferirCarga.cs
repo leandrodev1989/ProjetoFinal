@@ -44,7 +44,7 @@ namespace GestaoLogistica.Models
 
 
         [Required(ErrorMessage = "O Campo {0} é Obrigátorio")]
-        [DisplayName("Cubagem")]
+        [DisplayName("Cubagem M³")]
         public int Cubagem { get; set; }
 
         /* Relation */

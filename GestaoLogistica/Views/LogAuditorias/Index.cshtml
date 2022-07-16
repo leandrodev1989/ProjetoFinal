@@ -1,13 +1,15 @@
-﻿@model IEnumerable<GestaoLogistica.Models.LogAuditoria>
+﻿@model IEnumerable<GestaoLogistica.ViewModels.LogAuditoria>
 
 @{
     ViewData["Title"] = "Index";
 }
 
 
+   <h2> <button type="button" class="btn btn-info btn-lg btn-block">Log Auditoria</button> </h2>
 
 
-<table class="table table-dark table-hover table table-sm">
+
+<table  class="table table-dark table-hover table table-sm">
     <thead>
         <tr>
             <th>
@@ -15,9 +17,6 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.EmailUsuario)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Conferente)
             </th>
             <th></th>
         </tr>
@@ -31,9 +30,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.EmailUsuario)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Conferente.Cpf)
-            </td>
+           
         </tr>
 }
     </tbody>

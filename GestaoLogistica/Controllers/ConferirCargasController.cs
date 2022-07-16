@@ -1,11 +1,13 @@
 ﻿using GestaoLogistica.Data;
 using GestaoLogistica.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace GestaoLogistica.Controllers
 {
+    [Authorize]
     public class ConferirCargasController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -53,13 +55,13 @@ namespace GestaoLogistica.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create( ConferirCarga conferirCarga)
         {
-            int altura = 50, comprimento = 50, profundidade  = 50;
+            float altura = 0.50f, comprimento = 0.50f, profundidade  = 0.50f;
 
             float convert =  ((float)altura *  comprimento * profundidade);
 
             conferirCarga.Id = Guid.NewGuid();
                 _context.Add(conferirCarga);
-             conferirCarga.Cubagem = conferirCarga.QtdCaixas * (altura * comprimento * profundidade );
+             conferirCarga.Cubagem = Convert.ToInt32(conferirCarga.QtdCaixas * (altura * comprimento * profundidade ));
             await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             

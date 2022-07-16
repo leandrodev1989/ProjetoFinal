@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using GestaoLogistica.Data;
 using GestaoLogistica.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GestaoLogistica.Controllers
 {
+    [Authorize]
     public class EnderecosController : Controller
     {
         private readonly ApplicationDbContext _context;

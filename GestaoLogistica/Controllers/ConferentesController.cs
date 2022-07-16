@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using GestaoLogistica.Data;
+﻿using GestaoLogistica.Data;
 using GestaoLogistica.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace GestaoLogistica.Controllers
 {
+    [Authorize]
     public class ConferentesController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -19,7 +16,7 @@ namespace GestaoLogistica.Controllers
             _context = context;
         }
 
-        // GET: Conferentes
+       
         public async Task<IActionResult> Index()
         {
               return _context.Conferentes != null ? 
@@ -27,7 +24,6 @@ namespace GestaoLogistica.Controllers
                           Problem("Entity set 'ApplicationDbContext.Conferentes'  is null.");
         }
 
-        // GET: Conferentes/Details/5
         public async Task<IActionResult> Details(Guid? id)
         {
             if (id == null || _context.Conferentes == null)
@@ -45,7 +41,7 @@ namespace GestaoLogistica.Controllers
             return View(conferente);
         }
 
-        // GET: Conferentes/Create
+       
         public IActionResult Create()
         {
             return View();
@@ -66,7 +62,7 @@ namespace GestaoLogistica.Controllers
                 return View(conferente);
         }
 
-        // GET: Conferentes/Edit/5
+      
         public async Task<IActionResult> Edit(Guid? id)
         {
             if (id == null || _context.Conferentes == null)
@@ -115,7 +111,7 @@ namespace GestaoLogistica.Controllers
             return View(conferente);
         }
 
-        // GET: Conferentes/Delete/5
+        
         public async Task<IActionResult> Delete(Guid? id)
         {
             if (id == null || _context.Conferentes == null)
@@ -133,7 +129,7 @@ namespace GestaoLogistica.Controllers
             return View(conferente);
         }
 
-        // POST: Conferentes/Delete/5
+        
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)

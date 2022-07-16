@@ -6,10 +6,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using GestaoLogistica.Data;
-using GestaoLogistica.Models;
+using GestaoLogistica.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GestaoLogistica.Controllers
 {
+    [Authorize]
     public class LogAuditoriasController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -19,13 +21,13 @@ namespace GestaoLogistica.Controllers
             _context = context;
         }
 
-        // GET: LogAuditorias
+       
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.LogAuditorias.Include(l => l.Conferente);
-            return View(await applicationDbContext.ToListAsync());
+              return _context.LogAuditorias != null ? 
+                          View(await _context.LogAuditorias.ToListAsync()) :
+                          Problem("Entity set 'ApplicationDbContext.LogAuditorias'  is null.");
         }
 
-      
     }
 }

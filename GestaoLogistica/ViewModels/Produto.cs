@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace GestaoLogistica.Models
 {
-    public class Produto : Entity
+    public class Produto : Entity 
     {
         public Guid FornecedorId { get; set; }
       
