@@ -49,22 +49,6 @@ namespace GestaoLogistica.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Conferentes",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Nome = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Cpf = table.Column<string>(type: "nvarchar(11)", maxLength: 11, nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Turno = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Setor = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Conferentes", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Fornecedores",
                 columns: table => new
                 {
@@ -199,28 +183,25 @@ namespace GestaoLogistica.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ConferirCarga",
+                name: "Conferentes",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ConferenteId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    TipoOperacao = table.Column<int>(type: "int", nullable: false),
-                    Placa = table.Column<string>(type: "nvarchar(7)", maxLength: 7, nullable: false),
-                    Datahora = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Trasnportadora = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Doca = table.Column<int>(type: "int", nullable: false),
-                    QtdCaixas = table.Column<int>(type: "int", nullable: false),
-                    Cubagem = table.Column<int>(type: "int", nullable: false)
+                    Nome = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Cpf = table.Column<string>(type: "nvarchar(11)", maxLength: 11, nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Turno = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Setor = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
+                    FornecedorId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ConferirCarga", x => x.Id);
+                    table.PrimaryKey("PK_Conferentes", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ConferirCarga_Conferentes_ConferenteId",
-                        column: x => x.ConferenteId,
-                        principalTable: "Conferentes",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        name: "FK_Conferentes_Fornecedores_FornecedorId",
+                        column: x => x.FornecedorId,
+                        principalTable: "Fornecedores",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -256,9 +237,10 @@ namespace GestaoLogistica.Migrations
                     FornecedorId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Nome = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     Descricao = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: false),
+                    Entrada = table.Column<int>(type: "int", nullable: false),
                     Estoque = table.Column<int>(type: "int", nullable: false),
                     Valor = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Datacadastro = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DataEntrada = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Ativo = table.Column<bool>(type: "bit", nullable: false),
                     ConferenteId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
                 },
@@ -274,6 +256,39 @@ namespace GestaoLogistica.Migrations
                         name: "FK_Produtos_Fornecedores_FornecedorId",
                         column: x => x.FornecedorId,
                         principalTable: "Fornecedores",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ConferirCarga",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ConferenteId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ProdutoId = table.Column<int>(type: "int", nullable: false),
+                    TipoOperacao = table.Column<int>(type: "int", nullable: false),
+                    Placa = table.Column<string>(type: "nvarchar(7)", maxLength: 7, nullable: false),
+                    Datahora = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Trasnportadora = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Doca = table.Column<int>(type: "int", nullable: false),
+                    QtdCaixas = table.Column<int>(type: "int", nullable: false),
+                    Cubagem = table.Column<int>(type: "int", nullable: false),
+                    ProdutoId1 = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ConferirCarga", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ConferirCarga_Conferentes_ConferenteId",
+                        column: x => x.ConferenteId,
+                        principalTable: "Conferentes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ConferirCarga_Produtos_ProdutoId1",
+                        column: x => x.ProdutoId1,
+                        principalTable: "Produtos",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -318,9 +333,19 @@ namespace GestaoLogistica.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Conferentes_FornecedorId",
+                table: "Conferentes",
+                column: "FornecedorId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ConferirCarga_ConferenteId",
                 table: "ConferirCarga",
                 column: "ConferenteId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ConferirCarga_ProdutoId1",
+                table: "ConferirCarga",
+                column: "ProdutoId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Endereco_FornecedorId",
@@ -365,13 +390,13 @@ namespace GestaoLogistica.Migrations
                 name: "LogAuditorias");
 
             migrationBuilder.DropTable(
-                name: "Produtos");
-
-            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Produtos");
 
             migrationBuilder.DropTable(
                 name: "Conferentes");

@@ -8,7 +8,7 @@ namespace GestaoLogistica.Models
 {
     public class Fornecedor : Entity
     {
-        [Key]
+        
         public Guid Id { get; set; }
 
         [Required(ErrorMessage = "O Campo {0} é Obrigátorio")]
@@ -36,6 +36,7 @@ namespace GestaoLogistica.Models
         /// Relacionamento 1 para Muitos Com Produtos
         /// </summary>
         public IEnumerable<Produto> Produtos { get; set; }
+        public IEnumerable<Conferente> Conferentes { get; set; }
         
     }
 

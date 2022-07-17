@@ -4,6 +4,7 @@ using GestaoLogistica.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GestaoLogistica.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220716214659_novo")]
+    partial class novo
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -88,13 +90,7 @@ namespace GestaoLogistica.Migrations
                     b.Property<int>("QtdCaixas")
                         .HasColumnType("int");
 
-                    b.Property<int>("Saida")
-                        .HasColumnType("int");
-
                     b.Property<int>("TipoOperacao")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TipoProduto")
                         .HasColumnType("int");
 
                     b.Property<string>("Trasnportadora")

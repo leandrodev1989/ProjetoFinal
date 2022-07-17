@@ -8,12 +8,15 @@ namespace GestaoLogistica.Models
     public class ConferirCarga : Entity
     {
         
-
         public Guid ConferenteId { get; set; }   
 
         [Required(ErrorMessage = "O Campo {0} é Obrigátorio")]
         [DisplayName("Tipo Operação")]
         public TipoOperacao TipoOperacao { get; set; }
+
+        [Required(ErrorMessage = "O Campo {0} é Obrigátorio")]
+        [DisplayName("Tipo Produto")]
+        public TipoProduto TipoProduto { get; set; }
 
         [Required(ErrorMessage = "O Campo {0} é Obrigátorio")]
         [StringLength(7, ErrorMessage = "O Campo {0} precisa ter 7 Caracteres ")]
@@ -47,15 +50,19 @@ namespace GestaoLogistica.Models
         [DisplayName("Cubagem M³")]
         public int Cubagem { get; set; }
 
+        [Required(ErrorMessage = "O Campo {0} é Obrigátorio")]
+        [DisplayName("Qtd-Saida")]
+        public int Saida { get; set; }
+
+
+
         /* Relation */
         /// <summary>
         /// Relacionamento 1 para Muitos
         /// </summary>
         public Conferente Conferente { get; set; }
 
-
-
-      
+        public ICollection<Produto> produtos { get; set; } = new List<Produto>();
 
     }
 
@@ -64,5 +71,15 @@ namespace GestaoLogistica.Models
     {
         Expedicao = 1,
         Recebimento
+    }
+
+    public enum TipoProduto
+    {
+       
+        
+        Geladeira = 1,        
+        Fogao = 2,
+        Microondas = 3
+
     }
 }

@@ -4,6 +4,7 @@ using GestaoLogistica.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GestaoLogistica.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220716210721_Inicial")]
+    partial class Inicial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -85,16 +87,16 @@ namespace GestaoLogistica.Migrations
                         .HasMaxLength(7)
                         .HasColumnType("nvarchar(7)");
 
+                    b.Property<int>("ProdutoId")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("ProdutoId1")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<int>("QtdCaixas")
                         .HasColumnType("int");
 
-                    b.Property<int>("Saida")
-                        .HasColumnType("int");
-
                     b.Property<int>("TipoOperacao")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TipoProduto")
                         .HasColumnType("int");
 
                     b.Property<string>("Trasnportadora")
@@ -105,6 +107,8 @@ namespace GestaoLogistica.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ConferenteId");
+
+                    b.HasIndex("ProdutoId1");
 
                     b.ToTable("ConferirCarga");
                 });
@@ -199,9 +203,6 @@ namespace GestaoLogistica.Migrations
                     b.Property<Guid?>("ConferenteId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("ConferirCargaId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<DateTime>("DataEntrada")
                         .HasColumnType("datetime2");
 
@@ -230,8 +231,6 @@ namespace GestaoLogistica.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ConferenteId");
-
-                    b.HasIndex("ConferirCargaId");
 
                     b.HasIndex("FornecedorId");
 
@@ -476,7 +475,15 @@ namespace GestaoLogistica.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("GestaoLogistica.Models.Produto", "Produto")
+                        .WithMany()
+                        .HasForeignKey("ProdutoId1")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Conferente");
+
+                    b.Navigation("Produto");
                 });
 
             modelBuilder.Entity("GestaoLogistica.Models.Endereco", b =>
@@ -495,10 +502,6 @@ namespace GestaoLogistica.Migrations
                     b.HasOne("GestaoLogistica.Models.Conferente", null)
                         .WithMany("Produtos")
                         .HasForeignKey("ConferenteId");
-
-                    b.HasOne("GestaoLogistica.Models.ConferirCarga", null)
-                        .WithMany("produtos")
-                        .HasForeignKey("ConferirCargaId");
 
                     b.HasOne("GestaoLogistica.Models.Fornecedor", "Fornecedor")
                         .WithMany("Produtos")
@@ -563,11 +566,6 @@ namespace GestaoLogistica.Migrations
             modelBuilder.Entity("GestaoLogistica.Models.Conferente", b =>
                 {
                     b.Navigation("Produtos");
-                });
-
-            modelBuilder.Entity("GestaoLogistica.Models.ConferirCarga", b =>
-                {
-                    b.Navigation("produtos");
                 });
 
             modelBuilder.Entity("GestaoLogistica.Models.Fornecedor", b =>

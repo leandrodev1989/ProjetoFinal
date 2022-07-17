@@ -7,11 +7,12 @@ namespace GestaoLogistica.Models
     public class Produto : Entity 
     {
         public Guid FornecedorId { get; set; }
-      
-
+       
+       
+       
         [Required(ErrorMessage = "O Campo {0} é Obrigátorio")]
         [StringLength(200, ErrorMessage = "O Campo {0} precisa ter entre ", MinimumLength = 2)]
-        [DisplayName("Nome")]
+        [DisplayName("Nome Produto")]
         public string Nome { get; set; }
 
         [Required(ErrorMessage = "O Campo {0} é Obrigátorio")]
@@ -19,11 +20,14 @@ namespace GestaoLogistica.Models
         [DisplayName("Descrição")]
         public string Descricao { get; set; }
 
+        [Required(ErrorMessage = "O Campo {0} é Obrigátorio")]
+        [DisplayName("Qtd-Entrada")]
+        public int Entrada { get; set; }
+
         [Required(ErrorMessage = "O Campo {0} é Obrigátorio")]    
         [DisplayName("Estoque")]
-        
         public int  Estoque { get; set; }
-
+       
         [Moeda]
         [Required(ErrorMessage = "O Campo {0} é Obrigátorio")]
         [DisplayName("Valor")]
@@ -31,8 +35,8 @@ namespace GestaoLogistica.Models
 
         [Required(ErrorMessage = "O Campo {0} é Obrigátorio")]
         [DataType(DataType.DateTime)]
-        [DisplayName("Data Cadastro")]
-        public DateTime Datacadastro { get; set; }
+        [DisplayName("Data Entrada")]
+        public DateTime DataEntrada { get; set; }
 
         [DisplayName("Ativo")]
         [Required(ErrorMessage = "O Campo {0} é Obrigátorio")]
@@ -44,8 +48,8 @@ namespace GestaoLogistica.Models
         /// </summary>
         public Fornecedor Fornecedor { get; set; }
 
-
-
         
+       
+
     }
 }

@@ -25,7 +25,7 @@
                 @Html.DisplayNameFor(model => model.Valor)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Datacadastro)
+                @Html.DisplayNameFor(model => model.DataEntrada)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Ativo)
@@ -52,13 +52,13 @@
                 @Html.DisplayFor(modelItem => item.Valor)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Datacadastro)
+                @Html.DisplayFor(modelItem => item.DataEntrada)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Ativo)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Fornecedor.Documento)
+                @Html.DisplayFor(modelItem => item.Fornecedor.Nome)
             </td>
            <td  class="btn-group">
                 <a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.Id">  <spam class="fa fa-pencil-alt"></spam>Atualizar</a> 

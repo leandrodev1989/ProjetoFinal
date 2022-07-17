@@ -7,6 +7,7 @@ namespace GestaoLogistica.Models
     public class Conferente : Entity
     {
         
+       
 
         [Required(ErrorMessage = "O Campo {0} é Obrigátorio")]
         [StringLength(50, ErrorMessage = "O Campo {0} precisa ter entre ", MinimumLength = 2)]
@@ -27,7 +28,7 @@ namespace GestaoLogistica.Models
 
 
         [Required(ErrorMessage = "O Campo {0} é Obrigátorio")]
-        [StringLength(50, ErrorMessage = "O Campo {0} precisa ter entre ", MinimumLength = 6)]
+        [StringLength(50, ErrorMessage = "O Campo {0} precisa ter entre ")]
         [DisplayName("Turno")]
         public string Turno { get; set; }
 

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GestaoLogistica.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220715184452_Inicial")]
-    partial class Inicial
+    [Migration("20220716222645_saida")]
+    partial class saida
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -39,6 +39,9 @@ namespace GestaoLogistica.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid?>("FornecedorId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -55,6 +58,8 @@ namespace GestaoLogistica.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("FornecedorId");
 
                     b.ToTable("Conferentes");
                 });
@@ -83,6 +88,9 @@ namespace GestaoLogistica.Migrations
                         .HasColumnType("nvarchar(7)");
 
                     b.Property<int>("QtdCaixas")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Saida")
                         .HasColumnType("int");
 
                     b.Property<int>("TipoOperacao")
@@ -190,13 +198,19 @@ namespace GestaoLogistica.Migrations
                     b.Property<Guid?>("ConferenteId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("Datacadastro")
+                    b.Property<Guid?>("ConferirCargaId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("DataEntrada")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Descricao")
                         .IsRequired()
                         .HasMaxLength(1000)
                         .HasColumnType("nvarchar(1000)");
+
+                    b.Property<int>("Entrada")
+                        .HasColumnType("int");
 
                     b.Property<int>("Estoque")
                         .HasColumnType("int");
@@ -215,6 +229,8 @@ namespace GestaoLogistica.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ConferenteId");
+
+                    b.HasIndex("ConferirCargaId");
 
                     b.HasIndex("FornecedorId");
 
@@ -444,6 +460,13 @@ namespace GestaoLogistica.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("GestaoLogistica.Models.Conferente", b =>
+                {
+                    b.HasOne("GestaoLogistica.Models.Fornecedor", null)
+                        .WithMany("Conferentes")
+                        .HasForeignKey("FornecedorId");
+                });
+
             modelBuilder.Entity("GestaoLogistica.Models.ConferirCarga", b =>
                 {
                     b.HasOne("GestaoLogistica.Models.Conferente", "Conferente")
@@ -471,6 +494,10 @@ namespace GestaoLogistica.Migrations
                     b.HasOne("GestaoLogistica.Models.Conferente", null)
                         .WithMany("Produtos")
                         .HasForeignKey("ConferenteId");
+
+                    b.HasOne("GestaoLogistica.Models.ConferirCarga", null)
+                        .WithMany("produtos")
+                        .HasForeignKey("ConferirCargaId");
 
                     b.HasOne("GestaoLogistica.Models.Fornecedor", "Fornecedor")
                         .WithMany("Produtos")
@@ -537,8 +564,15 @@ namespace GestaoLogistica.Migrations
                     b.Navigation("Produtos");
                 });
 
+            modelBuilder.Entity("GestaoLogistica.Models.ConferirCarga", b =>
+                {
+                    b.Navigation("produtos");
+                });
+
             modelBuilder.Entity("GestaoLogistica.Models.Fornecedor", b =>
                 {
+                    b.Navigation("Conferentes");
+
                     b.Navigation("Produtos");
                 });
 #pragma warning restore 612, 618

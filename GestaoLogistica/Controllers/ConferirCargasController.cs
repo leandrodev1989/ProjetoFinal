@@ -46,26 +46,47 @@ namespace GestaoLogistica.Controllers
         // GET: ConferirCargas/Create
         public IActionResult Create()
         {
-            ViewData["ConferenteId"] = new SelectList(_context.Conferentes, "Id", "Cpf");
+            ViewData["ConferenteId"] = new SelectList(_context.Conferentes, "Id", "Nome");
+           
             return View();
         }
 
         
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create( ConferirCarga conferirCarga)
+        public async Task<IActionResult> Create(ConferirCarga conferirCarga)
         {
-            float altura = 0.50f, comprimento = 0.50f, profundidade  = 0.50f;
+           
+            float altura1 = 0.90f, comprimento1 = 0.70f, profundidade1 = 0.90f;
+            float altura2 = 0.50f, comprimento2 = 0.50f, profundidade2 = 0.50f;
+            float altura3 = 0.40f, comprimento3 = 0.40f, profundidade3 = 0.30f;
+            if (conferirCarga.TipoProduto.Equals(TipoProduto.Geladeira))
+            {
+               
+                float convert1 = ((float)altura1 * comprimento1 * profundidade1);
+                conferirCarga.Cubagem = Convert.ToInt32(conferirCarga.QtdCaixas * (altura1 * comprimento1* profundidade1));
 
-            float convert =  ((float)altura *  comprimento * profundidade);
+              
 
-            conferirCarga.Id = Guid.NewGuid();
-                _context.Add(conferirCarga);
-             conferirCarga.Cubagem = Convert.ToInt32(conferirCarga.QtdCaixas * (altura * comprimento * profundidade ));
-            await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+            }
+            else if (conferirCarga.TipoProduto.Equals(TipoProduto.Fogao))
+            {
+                float convert2 = ((float)altura2 * comprimento2 * profundidade2);
+                conferirCarga.Cubagem = Convert.ToInt32(conferirCarga.QtdCaixas * (altura2 * comprimento2 * profundidade2));
             
-            ViewData["ConferenteId"] = new SelectList(_context.Conferentes, "Id", "Cpf", conferirCarga.ConferenteId);
+            }
+            else if(conferirCarga.TipoProduto.Equals(TipoProduto.Microondas))
+            {
+                float convert3 = ((float)altura3 * comprimento3 * profundidade3);
+                conferirCarga.Cubagem = Convert.ToInt32(conferirCarga.QtdCaixas * (altura3 * comprimento3 * profundidade3));            
+            }
+            _context.Add(conferirCarga);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+            conferirCarga.Id = Guid.NewGuid();
+             
+            ViewData["ConferenteId"] = new SelectList(_context.Conferentes, "Id", "Nome", conferirCarga.ConferenteId);
+           
             return View(conferirCarga);
         }
 
@@ -82,7 +103,7 @@ namespace GestaoLogistica.Controllers
             {
                 return NotFound();
             }
-            ViewData["ConferenteId"] = new SelectList(_context.Conferentes, "Id", "Cpf", conferirCarga.ConferenteId);
+            ViewData["ConferenteId"] = new SelectList(_context.Conferentes, "Id", "Nome", conferirCarga.ConferenteId);
             return View(conferirCarga);
         }
 

@@ -32,7 +32,9 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Cubagem)
+               
             </th>
+             
             <th>
                 @Html.DisplayNameFor(model => model.Conferente)
             </th>
@@ -61,10 +63,11 @@
                 @Html.DisplayFor(modelItem => item.QtdCaixas)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Cubagem)
+                @Html.DisplayFor(modelItem => item.Cubagem ) M³
             </td>
+            
             <td>
-                @Html.DisplayFor(modelItem => item.Conferente.Cpf)
+                @Html.DisplayFor(modelItem => item.Conferente.Nome)
             </td>
             <td  class="btn-group">
                <a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.Id">  <spam class="fa fa-pencil-alt"></spam>Atualizar</a> 

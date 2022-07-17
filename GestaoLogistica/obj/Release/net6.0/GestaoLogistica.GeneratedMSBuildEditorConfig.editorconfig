@@ -79,26 +79,6 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29uZmVyaXJDYXJnYXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Usuário/Estudos/GestaoLogistica/Views/Enderecos/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW5kZXJlY29zXENyZWF0ZS5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/Usuário/Estudos/GestaoLogistica/Views/Enderecos/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW5kZXJlY29zXERlbGV0ZS5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/Usuário/Estudos/GestaoLogistica/Views/Enderecos/Details.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW5kZXJlY29zXERldGFpbHMuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/Usuário/Estudos/GestaoLogistica/Views/Enderecos/Edit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW5kZXJlY29zXEVkaXQuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/Usuário/Estudos/GestaoLogistica/Views/Enderecos/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW5kZXJlY29zXEluZGV4LmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/Usuário/Estudos/GestaoLogistica/Views/Fornecedores/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRm9ybmVjZWRvcmVzXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -119,24 +99,12 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRm9ybmVjZWRvcmVzXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/Usuário/Estudos/GestaoLogistica/Views/Fornecedores/_Endereco.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRm9ybmVjZWRvcmVzXF9FbmRlcmVjby5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Usuário/Estudos/GestaoLogistica/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/Usuário/Estudos/GestaoLogistica/Views/LogAuditorias/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9nQXVkaXRvcmlhc1xDcmVhdGUuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/Usuário/Estudos/GestaoLogistica/Views/LogAuditorias/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9nQXVkaXRvcmlhc1xEZWxldGUuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/Usuário/Estudos/GestaoLogistica/Views/LogAuditorias/Details.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9nQXVkaXRvcmlhc1xEZXRhaWxzLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/Usuário/Estudos/GestaoLogistica/Views/LogAuditorias/Edit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9nQXVkaXRvcmlhc1xFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Usuário/Estudos/GestaoLogistica/Views/LogAuditorias/Index.cshtml]

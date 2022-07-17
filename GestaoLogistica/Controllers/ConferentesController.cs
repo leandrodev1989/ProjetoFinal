@@ -50,11 +50,11 @@ namespace GestaoLogistica.Controllers
       
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create( Conferente conferente)
+        public async Task<IActionResult> Create(Conferente conferente)
         {
-           
-            
-                conferente.Id = Guid.NewGuid();
+
+
+            conferente.Id = Guid.NewGuid();
                 _context.Add(conferente);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -88,8 +88,10 @@ namespace GestaoLogistica.Controllers
                 return NotFound();
             }
 
-           
-            
+
+            if (ModelState.IsValid)
+            {
+
                 try
                 {
                     _context.Update(conferente);
@@ -107,8 +109,14 @@ namespace GestaoLogistica.Controllers
                     }
                 }
                 return RedirectToAction(nameof(Index));
+            }
+            else
+            {
+                return View(conferente);
+            }
+          
             
-            return View(conferente);
+            
         }
 
         
