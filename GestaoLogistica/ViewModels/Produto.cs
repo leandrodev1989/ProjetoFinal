@@ -50,7 +50,7 @@ namespace GestaoLogistica.Models
         /// <summary>
         /// Relacionamneto 1 para Muitos
         /// </summary>
-        public virtual Fornecedor Fornecedor { get; set; }
+        public  Fornecedor Fornecedor { get; set; }
 
 
     

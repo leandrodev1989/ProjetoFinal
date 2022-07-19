@@ -55,7 +55,7 @@ namespace GestaoLogistica.Models
         /// </summary>
         public Conferente Conferente { get; set; }  
         
-        public virtual IEnumerable<Produto> produtos {get; set; }
+        public  IEnumerable<Produto> produtos {get; set; }
        
     }
 

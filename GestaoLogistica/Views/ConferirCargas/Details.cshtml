@@ -4,13 +4,13 @@
     ViewData["Title"] = "Details";
 }
 
+<h3  button type="button" class="btn btn-info btn-lg btn-block" >Tela de Informações</h3>
 
-
-<div>
+<div class=" offset-md-4" >
    
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class = "col-sm-2" > 
             @Html.DisplayNameFor(model => model.TipoOperacao)
         </dt>
         <dd class = "col-sm-10">
@@ -60,8 +60,9 @@
             @Html.DisplayFor(model => model.Conferente.Nome)
         </dd>
     </dl>
-</div>
-<div>
+    <div>
     <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-warning">Atualizar</a> 
     <a asp-action="Index" class="btn btn-dark">voltar</a>
 </div>
+</div>
+

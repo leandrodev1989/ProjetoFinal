@@ -1,5 +1,6 @@
 ﻿using GestaoLogistica.Data;
 using GestaoLogistica.Models;
+using GestaoLogistica.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -97,7 +98,17 @@ namespace GestaoLogistica.Controllers
                 float convert3 = ((float)altura3 * comprimento3 * profundidade3);
                 conferirCarga.Cubagem = Convert.ToInt32(conferirCarga.QtdCaixas * (altura3 * comprimento3 * profundidade3));            
             }
-      
+            ///Iniciando o Log de Auditoria para Retornar o Usuario que fez o cadastro de determinado carregamento E HORARIO
+            _context.LogAuditorias.Add(
+           new LogAuditoria
+           {
+               EmailUsuario = User.Identity.Name,
+               DetalhesAuditoria = String.Concat("Realizou uma Conferência com placa : ",
+               conferirCarga.Placa, " Data de Conferência : ", DateTime.Now.ToLongDateString())
+
+
+           });
+
             _context.Add(conferirCarga);
 
             await _context.SaveChangesAsync();
@@ -148,8 +159,18 @@ namespace GestaoLogistica.Controllers
            
                 try
                 {
-                    _context.Update(conferirCarga);
-                    await _context.SaveChangesAsync();
+                _context.Update(conferirCarga);
+                await _context.SaveChangesAsync();
+                ///Registrando O Momento que usuario atualiza o carregamento e data
+                _context.LogAuditorias.Add(
+                  new LogAuditoria
+                  {
+                      EmailUsuario = User.Identity.Name,
+                      DetalhesAuditoria = String.Concat("Atualizou Carga com placa : ",
+                      conferirCarga.Placa, " Data de Atualização : ", DateTime.Now.ToLongDateString())
+                     
+                  }) ;
+                    _context.SaveChanges();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -208,6 +229,15 @@ namespace GestaoLogistica.Controllers
             }
             
             await _context.SaveChangesAsync();
+            _context.LogAuditorias.Add(
+      new LogAuditoria
+      {   ///Registrando o Usuario no momento que ele deleta o carregamento
+              EmailUsuario = User.Identity.Name,
+          DetalhesAuditoria = String.Concat("Deletou o Carregamento de placa : ",
+          conferirCarga.Placa, " Data de Exclusão : ", DateTime.Now.ToLongDateString())
+
+      });
+            _context.SaveChanges();
             return RedirectToAction(nameof(Index));
         }
 

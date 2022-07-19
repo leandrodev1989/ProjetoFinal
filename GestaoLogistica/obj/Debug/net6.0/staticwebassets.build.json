@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "4iZBsmRhJg61XcIg167SVgunA92jkfdaRU7exH8xXNo=",
+  "Hash": "O1258hQ1t8p+F/O7aqTXkakXx5BIYX4g2BgMhExkzjo=",
   "Source": "GestaoLogistica",
   "BasePath": "_content/GestaoLogistica",
   "Mode": "Default",
@@ -1802,6 +1802,23 @@
       "OriginalItemSpec": "wwwroot\\dist\\img\\logistic.png"
     },
     {
+      "Identity": "C:\\Users\\Usuário\\Estudos\\GestaoLogistica\\wwwroot\\dist\\img\\logo.png",
+      "SourceId": "GestaoLogistica",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Usuário\\Estudos\\GestaoLogistica\\wwwroot\\",
+      "BasePath": "_content/GestaoLogistica",
+      "RelativePath": "dist/img/logo.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\dist\\img\\logo.png"
+    },
+    {
       "Identity": "C:\\Users\\Usuário\\Estudos\\GestaoLogistica\\wwwroot\\dist\\js\\.eslintrc.json",
       "SourceId": "GestaoLogistica",
       "SourceType": "Discovered",
@@ -2990,23 +3007,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
-    },
-    {
-      "Identity": "C:\\Users\\Usuário\\Estudos\\GestaoLogistica\\wwwroot\\logo.png",
-      "SourceId": "GestaoLogistica",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Usuário\\Estudos\\GestaoLogistica\\wwwroot\\",
-      "BasePath": "_content/GestaoLogistica",
-      "RelativePath": "logo.png",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\logo.png"
     },
     {
       "Identity": "C:\\Users\\Usuário\\Estudos\\GestaoLogistica\\wwwroot\\plugins\\bootstrap\\js\\bootstrap.bundle.js",

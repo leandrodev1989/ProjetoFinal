@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GestaoLogistica.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220718233322_vamos")]
-    partial class vamos
+    [Migration("20220719112408_finalizando")]
+    partial class finalizando
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -203,6 +203,11 @@ namespace GestaoLogistica.Migrations
 
                     b.Property<DateTime>("DataEntrada")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("Descricao")
+                        .IsRequired()
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
 
                     b.Property<int>("Entrada")
                         .HasColumnType("int");

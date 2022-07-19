@@ -1,5 +1,6 @@
 ﻿using GestaoLogistica.Data;
 using GestaoLogistica.Models;
+using GestaoLogistica.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -75,7 +76,17 @@ namespace GestaoLogistica.Controllers
                 fornecedor.Id = Guid.NewGuid();
                 _context.Add(fornecedor);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+
+            _context.LogAuditorias.Add(
+         new LogAuditoria
+         {
+             EmailUsuario = User.Identity.Name,
+             DetalhesAuditoria = String.Concat("Realizou o Cadastro do Fornecedor : ",
+             fornecedor.Nome, " Data do Cadastro : ", DateTime.Now.ToLongDateString())
+
+
+         });
+            return RedirectToAction(nameof(Index));
             
             return View(fornecedor);
         }
@@ -114,7 +125,16 @@ namespace GestaoLogistica.Controllers
                 {
                     _context.Update(fornecedor);
                     await _context.SaveChangesAsync();
-                }
+                _context.LogAuditorias.Add(
+               new LogAuditoria
+               {
+                   EmailUsuario = User.Identity.Name,
+                   DetalhesAuditoria = String.Concat("Atualizou o Fornecedor de nome  : ",
+                   fornecedor.Nome, " Data de Atualização : ", DateTime.Now.ToLongDateString())
+
+               });
+                _context.SaveChanges();
+            }
                 catch (DbUpdateConcurrencyException)
                 {
                     if (!FornecedorExists(fornecedor.Id))
@@ -167,8 +187,17 @@ namespace GestaoLogistica.Controllers
             {
                 _context.Fornecedores.Remove(fornecedor);
             }
-            
+            new LogAuditoria
+            {   ///Registrando o Usuario no momento que ele deleta o carregamento
+                EmailUsuario = User.Identity.Name,
+                DetalhesAuditoria = String.Concat("Deletou o Carregamento de placa : ",
+                     fornecedor.Nome, " Data de Exclusão : ", DateTime.Now.ToLongDateString())
+
+            };
+            _context.SaveChanges();
             await _context.SaveChangesAsync();
+           
+
             return RedirectToAction(nameof(Index));
         }
 

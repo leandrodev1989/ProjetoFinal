@@ -1,5 +1,6 @@
 ﻿using GestaoLogistica.Data;
 using GestaoLogistica.Models;
+using GestaoLogistica.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -75,7 +76,16 @@ namespace GestaoLogistica.Controllers
 
             conferente.Id = Guid.NewGuid();
                 _context.Add(conferente);
-                await _context.SaveChangesAsync();
+            _context.LogAuditorias.Add(
+             new LogAuditoria
+             {
+                 EmailUsuario = User.Identity.Name,
+                 DetalhesAuditoria = String.Concat("Cadastrou o Conferente: ",
+                 conferente.Nome, " Data de Cadastro : ", DateTime.Now.ToLongDateString())
+
+
+             });
+            await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             
                 return View(conferente);
@@ -121,8 +131,11 @@ namespace GestaoLogistica.Controllers
 
                 try
                 {
+                   
                     _context.Update(conferente);
+                      
                     await _context.SaveChangesAsync();
+               
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -135,6 +148,7 @@ namespace GestaoLogistica.Controllers
                         throw;
                     }
                 }
+                   
                 return RedirectToAction(nameof(Index));
                         
                 return View(conferente);
