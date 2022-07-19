@@ -4,23 +4,24 @@
 
 namespace GestaoLogistica.Migrations
 {
-    public partial class saida : Migration
+    public partial class finalizando : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<int>(
-                name: "Saida",
-                table: "ConferirCarga",
-                type: "int",
+            migrationBuilder.AddColumn<string>(
+                name: "Descricao",
+                table: "Produtos",
+                type: "nvarchar(1000)",
+                maxLength: 1000,
                 nullable: false,
-                defaultValue: 0);
+                defaultValue: "");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "Saida",
-                table: "ConferirCarga");
+                name: "Descricao",
+                table: "Produtos");
         }
     }
 }

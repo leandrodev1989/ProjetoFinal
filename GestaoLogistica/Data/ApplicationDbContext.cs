@@ -18,6 +18,7 @@ namespace GestaoLogistica.Data
         public DbSet<LogAuditoria> LogAuditorias { get; set; }
         public DbSet<Conferente> Conferentes { get; set; }
         public DbSet<ConferirCarga> ConferirCarga { get; set; }
+        
        
     }
 }

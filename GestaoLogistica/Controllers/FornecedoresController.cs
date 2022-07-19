@@ -1,16 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using GestaoLogistica.Data;
+﻿using GestaoLogistica.Data;
 using GestaoLogistica.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace GestaoLogistica.Controllers
 {
+    /// <summary>
+    /// Usando o Identity para o usuario só acessar a aplicação se logado
+    /// </summary>
     [Authorize]
     public class FornecedoresController : Controller
     {
@@ -21,7 +19,10 @@ namespace GestaoLogistica.Controllers
             _context = context;
         }
 
-        // GET: Fornecedores
+        /// <summary>
+        /// GET: Fornecedores
+        /// </summary>
+        /// <returns></returns>
         public async Task<IActionResult> Index()
         {
               return _context.Fornecedores != null ? 
@@ -29,7 +30,11 @@ namespace GestaoLogistica.Controllers
                           Problem("Entity set 'ApplicationDbContext.Fornecedores'  is null.");
         }
 
-        // GET: Fornecedores/Details/5
+        /// <summary>
+        ///  GET: Fornecedores Delete
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<IActionResult> Details(Guid? id)
         {
             if (id == null || _context.Fornecedores == null)
@@ -47,15 +52,20 @@ namespace GestaoLogistica.Controllers
             return View(fornecedor);
         }
 
-        // GET: Fornecedores/Create
+        /// <summary>
+        ///  GET: Fornecedores para a criação de um novo
+        /// </summary>
+        /// <returns></returns>
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Fornecedores/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        ///  POST: Fornecedores/Create para Criar e cadastrar  um novno fornecedor    
+        /// </summary>
+        /// <param name="fornecedor"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Fornecedor fornecedor)
@@ -86,9 +96,11 @@ namespace GestaoLogistica.Controllers
             return View(fornecedor);
         }
 
-        // POST: Fornecedores/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        ///  POST: Fornecedores/Edit para Criar e atualizar  um novno fornecedor    
+        /// </summary>
+        /// <param name="fornecedor"></param>
+        /// <returns></returns> 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Guid id, Fornecedor fornecedor)
@@ -97,9 +109,7 @@ namespace GestaoLogistica.Controllers
             {
                 return NotFound();
             }
-
-           
-            
+         
                 try
                 {
                     _context.Update(fornecedor);
@@ -139,7 +149,11 @@ namespace GestaoLogistica.Controllers
             return View(fornecedor);
         }
 
-        // POST: Fornecedores/Delete/5
+        /// <summary>
+        ///  POST: Fornecedores/Delet para Criar Excluir  um fornecedor    
+        /// </summary>
+        /// <param name="fornecedor"></param>
+        /// <returns></returns>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)

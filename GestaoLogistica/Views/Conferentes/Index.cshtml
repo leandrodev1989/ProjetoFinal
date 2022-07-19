@@ -2,14 +2,13 @@
 
 @{
     ViewData["Title"] = "Index";
+     <img src="../../dist/img/log.png" />
 }
 
 
+<hr />
 
-<p>
-    <a asp-action="Create" button type="button" class="btn btn-info">Cadastrar Novo Conferente</a>
-</p>
-<table class="table table-dark table-hover table table-sm">
+<table  class="table table-dark table-hover table table-sm">
     <thead>
         <tr>
             <th>
@@ -27,7 +26,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.Setor)
             </th>
-            <th></th>
+                    
         </tr>
     </thead>
     <tbody>
@@ -57,3 +56,7 @@
 }
     </tbody>
 </table>
+<p>
+    <a asp-action="Create" button type="button" class="btn btn-info">Cadastrar Novo Conferente</a>
+</p>
+

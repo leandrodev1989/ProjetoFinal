@@ -18,11 +18,15 @@ namespace GestaoLogistica.Models
         [Required(ErrorMessage = "O Campo {0} é Obrigátorio")]
         [MaxLength(1000, ErrorMessage = "O Número de Caracteres tem que ser Menor")]
         [DisplayName("Descrição")]
-        public string Descricao { get; set; }
+        public string? Descricao { get; set; }
 
         [Required(ErrorMessage = "O Campo {0} é Obrigátorio")]
         [DisplayName("Qtd-Entrada")]
         public int Entrada { get; set; }
+
+        [Required(ErrorMessage = "O Campo {0} é Obrigátorio")]
+        [DisplayName("Qtd-Saida")]
+        public int Saida { get; set; }
 
         [Required(ErrorMessage = "O Campo {0} é Obrigátorio")]    
         [DisplayName("Estoque")]
@@ -46,10 +50,9 @@ namespace GestaoLogistica.Models
         /// <summary>
         /// Relacionamneto 1 para Muitos
         /// </summary>
-        public Fornecedor Fornecedor { get; set; }
+        public virtual Fornecedor Fornecedor { get; set; }
 
-        
-       
 
+    
     }
 }

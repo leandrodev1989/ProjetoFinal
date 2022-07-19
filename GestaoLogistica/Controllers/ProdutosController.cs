@@ -26,13 +26,13 @@ namespace GestaoLogistica.Controllers
         public async Task<IActionResult> Index()
         {
 
-            _context.LogAuditorias.Add(
-         new LogAuditoria
-         {
-             EmailUsuario = User.Identity.Name,
-             DetalhesAuditoria = "Entro na Tela de Listagem do Produto: "
+         //   _context.LogAuditorias.Add(
+         //new LogAuditoria
+         //{
+         //    EmailUsuario = User.Identity.Name,
+         //    DetalhesAuditoria = "Entro na Tela de Listagem do Produto: "
 
-         });
+         //});
 
 
             var applicationDbContext = _context.Produtos.Include(p => p.Fornecedor);
@@ -67,7 +67,7 @@ namespace GestaoLogistica.Controllers
 
 
          });
-            _context.SaveChangesAsync();
+            _ = _context.SaveChangesAsync();
             return View(produto);
         }
 
@@ -79,40 +79,47 @@ namespace GestaoLogistica.Controllers
             return View();
         }
 
-        // POST: Produtos/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+
+        /// <summary>
+        /// Metodo de Criação e Cadastro de produto
+        /// </summary>
+        /// <param name="produto"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Produto produto)
         {
+         
+                produto.Id = Guid.NewGuid();
+                _context.Add(produto);
+                ///Executando entrada no Estoque no hora do Cadastro
+                produto.Estoque = produto.Entrada += produto.Estoque;
 
 
-          
+              ///Iniciando o Log de Auditoria para Retornar o Usuario que fez o cadastro de determinado PRODUTO E HORARIO
+                _context.LogAuditorias.Add(
+               new LogAuditoria
+               {
+                   EmailUsuario = User.Identity.Name,
+                   DetalhesAuditoria = String.Concat("Cadastrou o Produto: ",
+                   produto.Nome, " Data de Cadastro : ", DateTime.Now.ToLongDateString())
+
+
+               });
+
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+
+                ViewData["FornecedorId"] = new SelectList(_context.Fornecedores, "Id", "Nome", produto.FornecedorId);
             
-            produto.Id = Guid.NewGuid();
-            _context.Add(produto);
-
-            produto.Estoque = produto.Entrada += produto.Estoque;
-           
-            _context.LogAuditorias.Add(
-           new LogAuditoria
-           {
-               EmailUsuario = User.Identity.Name,
-               DetalhesAuditoria = String.Concat("Cadastrou o Produto: ",
-               produto.Nome, " Data de Cadastro : ", DateTime.Now.ToLongDateString())
-
-
-           });
-
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            
           
-            ViewData["FornecedorId"] = new SelectList(_context.Fornecedores, "Id", "Nome", produto.FornecedorId);
             return View(produto);
         }
 
-        // GET: Produtos/Edit/5
+
+
+        // GET: Produto
         public async Task<IActionResult> Edit(Guid? id)
         {
             if (id == null || _context.Produtos == null)
@@ -126,7 +133,7 @@ namespace GestaoLogistica.Controllers
                 return NotFound();
             }
 
-
+            ///Registro No Log  no momento que usuario entra na index de edição do produto
             _context.LogAuditorias.Add(
          new LogAuditoria
          {
@@ -137,13 +144,18 @@ namespace GestaoLogistica.Controllers
 
          });
 
-            _context.SaveChangesAsync();
+            await _context.SaveChangesAsync().ConfigureAwait(false);
             ViewData["FornecedorId"] = new SelectList(_context.Fornecedores, "Id", "Nome", produto.FornecedorId);
             return View(produto);
         }
 
 
-
+        /// <summary>
+        /// Metodo Post para editar o produto
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="produto"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Guid id, Produto produto)
@@ -157,9 +169,10 @@ namespace GestaoLogistica.Controllers
 
             try
             {
+
                 _context.Update(produto);
                 await _context.SaveChangesAsync();
-
+                ///Registrando O Momento que usuario atualiza o produto e data
                 _context.LogAuditorias.Add(
                   new LogAuditoria
                   {
@@ -187,7 +200,7 @@ namespace GestaoLogistica.Controllers
             return View(produto);
         }
 
-        // GET: Produtos/Delete/5
+        // GET: Produtos
         public async Task<IActionResult> Delete(Guid? id)
         {
             if (id == null || _context.Produtos == null)
@@ -206,7 +219,11 @@ namespace GestaoLogistica.Controllers
             return View(produto);
         }
 
-        // POST: Produtos/Delete/5
+        /// <summary>
+        /// POST: Produtos para Confirmar a exclusão do produto
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
@@ -225,7 +242,7 @@ namespace GestaoLogistica.Controllers
 
             _context.LogAuditorias.Add(
           new LogAuditoria
-          {
+          {   ///Registrando o Usuario no momento que ele deleta o produto
               EmailUsuario = User.Identity.Name,
               DetalhesAuditoria = String.Concat("Deletou o Produto: ",
               produto.Nome, " Data de Exclusão : ", DateTime.Now.ToLongDateString())

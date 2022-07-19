@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GestaoLogistica.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220716214659_novo")]
-    partial class novo
+    [Migration("20220718233322_vamos")]
+    partial class vamos
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -91,6 +91,9 @@ namespace GestaoLogistica.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("TipoOperacao")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TipoProduto")
                         .HasColumnType("int");
 
                     b.Property<string>("Trasnportadora")
@@ -201,11 +204,6 @@ namespace GestaoLogistica.Migrations
                     b.Property<DateTime>("DataEntrada")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Descricao")
-                        .IsRequired()
-                        .HasMaxLength(1000)
-                        .HasColumnType("nvarchar(1000)");
-
                     b.Property<int>("Entrada")
                         .HasColumnType("int");
 
@@ -219,6 +217,9 @@ namespace GestaoLogistica.Migrations
                         .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
+
+                    b.Property<int>("Saida")
+                        .HasColumnType("int");
 
                     b.Property<decimal>("Valor")
                         .HasColumnType("decimal(18,2)");

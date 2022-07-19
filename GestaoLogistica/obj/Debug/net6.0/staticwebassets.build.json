@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "Mzd7fxU3FaSPeOnja68bkgMDn5B3JC+Ob7ivhGereZM=",
+  "Hash": "4iZBsmRhJg61XcIg167SVgunA92jkfdaRU7exH8xXNo=",
   "Source": "GestaoLogistica",
   "BasePath": "_content/GestaoLogistica",
   "Mode": "Default",
@@ -1751,6 +1751,23 @@
       "OriginalItemSpec": "wwwroot\\dist\\css\\alt\\adminlte.plugins.min.css.map"
     },
     {
+      "Identity": "C:\\Users\\Usuário\\Estudos\\GestaoLogistica\\wwwroot\\dist\\img\\log.png",
+      "SourceId": "GestaoLogistica",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Usuário\\Estudos\\GestaoLogistica\\wwwroot\\",
+      "BasePath": "_content/GestaoLogistica",
+      "RelativePath": "dist/img/log.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\dist\\img\\log.png"
+    },
+    {
       "Identity": "C:\\Users\\Usuário\\Estudos\\GestaoLogistica\\wwwroot\\dist\\img\\logistic.jpg",
       "SourceId": "GestaoLogistica",
       "SourceType": "Discovered",
@@ -1887,6 +1904,23 @@
       "OriginalItemSpec": "wwwroot\\dist\\js\\demo.js"
     },
     {
+      "Identity": "C:\\Users\\Usuário\\Estudos\\GestaoLogistica\\wwwroot\\dist\\js\\logi.png",
+      "SourceId": "GestaoLogistica",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Usuário\\Estudos\\GestaoLogistica\\wwwroot\\",
+      "BasePath": "_content/GestaoLogistica",
+      "RelativePath": "dist/js/logi.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\dist\\js\\logi.png"
+    },
+    {
       "Identity": "C:\\Users\\Usuário\\Estudos\\GestaoLogistica\\wwwroot\\dist\\js\\pages\\dashboard.js",
       "SourceId": "GestaoLogistica",
       "SourceType": "Discovered",
@@ -1936,23 +1970,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\dist\\js\\pages\\dashboard3.js"
-    },
-    {
-      "Identity": "C:\\Users\\Usuário\\Estudos\\GestaoLogistica\\wwwroot\\favicon.ico",
-      "SourceId": "GestaoLogistica",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Usuário\\Estudos\\GestaoLogistica\\wwwroot\\",
-      "BasePath": "_content/GestaoLogistica",
-      "RelativePath": "favicon.ico",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\favicon.ico"
     },
     {
       "Identity": "C:\\Users\\Usuário\\Estudos\\GestaoLogistica\\wwwroot\\js\\site.js",
@@ -2973,6 +2990,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
+    },
+    {
+      "Identity": "C:\\Users\\Usuário\\Estudos\\GestaoLogistica\\wwwroot\\logo.png",
+      "SourceId": "GestaoLogistica",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Usuário\\Estudos\\GestaoLogistica\\wwwroot\\",
+      "BasePath": "_content/GestaoLogistica",
+      "RelativePath": "logo.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\logo.png"
     },
     {
       "Identity": "C:\\Users\\Usuário\\Estudos\\GestaoLogistica\\wwwroot\\plugins\\bootstrap\\js\\bootstrap.bundle.js",

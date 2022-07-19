@@ -38,7 +38,6 @@ namespace GestaoLogistica.Models
         [DisplayName("Setor")]
         public string Setor { get; set; }
 
-
         /* EF Relation */
         /// <summary>
         /// Relacionamento 1 para Muitos Com Produtos

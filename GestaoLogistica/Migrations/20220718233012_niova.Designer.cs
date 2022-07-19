@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GestaoLogistica.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220717030409_vamos")]
-    partial class vamos
+    [Migration("20220718233012_niova")]
+    partial class niova
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -88,9 +88,6 @@ namespace GestaoLogistica.Migrations
                         .HasColumnType("nvarchar(7)");
 
                     b.Property<int>("QtdCaixas")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Saida")
                         .HasColumnType("int");
 
                     b.Property<int>("TipoOperacao")
@@ -201,16 +198,8 @@ namespace GestaoLogistica.Migrations
                     b.Property<Guid?>("ConferenteId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("ConferirCargaId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<DateTime>("DataEntrada")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("Descricao")
-                        .IsRequired()
-                        .HasMaxLength(1000)
-                        .HasColumnType("nvarchar(1000)");
 
                     b.Property<int>("Entrada")
                         .HasColumnType("int");
@@ -226,14 +215,15 @@ namespace GestaoLogistica.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
+                    b.Property<int>("Saida")
+                        .HasColumnType("int");
+
                     b.Property<decimal>("Valor")
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ConferenteId");
-
-                    b.HasIndex("ConferirCargaId");
 
                     b.HasIndex("FornecedorId");
 
@@ -498,10 +488,6 @@ namespace GestaoLogistica.Migrations
                         .WithMany("Produtos")
                         .HasForeignKey("ConferenteId");
 
-                    b.HasOne("GestaoLogistica.Models.ConferirCarga", null)
-                        .WithMany("produtos")
-                        .HasForeignKey("ConferirCargaId");
-
                     b.HasOne("GestaoLogistica.Models.Fornecedor", "Fornecedor")
                         .WithMany("Produtos")
                         .HasForeignKey("FornecedorId")
@@ -565,11 +551,6 @@ namespace GestaoLogistica.Migrations
             modelBuilder.Entity("GestaoLogistica.Models.Conferente", b =>
                 {
                     b.Navigation("Produtos");
-                });
-
-            modelBuilder.Entity("GestaoLogistica.Models.ConferirCarga", b =>
-                {
-                    b.Navigation("produtos");
                 });
 
             modelBuilder.Entity("GestaoLogistica.Models.Fornecedor", b =>

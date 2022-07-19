@@ -1,4 +1,4 @@
-﻿using GestaoLogistica.Enums;
+﻿
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -35,8 +35,8 @@ namespace GestaoLogistica.Models
         /// <summary>
         /// Relacionamento 1 para Muitos Com Produtos
         /// </summary>
-        public IEnumerable<Produto> Produtos { get; set; }
-        public IEnumerable<Conferente> Conferentes { get; set; }
+        public virtual IEnumerable<Produto> Produtos { get; set; }
+        public virtual IEnumerable<Conferente> Conferentes { get; set; }
         
     }
 

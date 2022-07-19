@@ -11,6 +11,9 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace GestaoLogistica.Controllers
 {
+    /// <summary>
+    /// Controler Principal do Log de Auditoria
+    /// </summary>
     [Authorize]
     public class LogAuditoriasController : Controller
     {
@@ -21,7 +24,10 @@ namespace GestaoLogistica.Controllers
             _context = context;
         }
 
-       
+        /// <summary>
+        /// Lista as Atividades Realizadas do usuario logado na aplicação
+        /// </summary>
+        /// <returns></returns>
         public async Task<IActionResult> Index()
         {
               return _context.LogAuditorias != null ? 

@@ -40,7 +40,6 @@ namespace GestaoLogistica.Models
         public int Doca { get; set; }
 
 
-
         [Required(ErrorMessage = "O Campo {0} é Obrigátorio")]
         [DisplayName("Qtd Caixas")]
         public int QtdCaixas { get; set; }
@@ -48,22 +47,16 @@ namespace GestaoLogistica.Models
 
         [Required(ErrorMessage = "O Campo {0} é Obrigátorio")]
         [DisplayName("Cubagem M³")]
-        public int Cubagem { get; set; }
-
-        [Required(ErrorMessage = "O Campo {0} é Obrigátorio")]
-        [DisplayName("Qtd-Saida")]
-        public int Saida { get; set; }
-
-
+        public int Cubagem { get; set; }   
 
         /* Relation */
         /// <summary>
         /// Relacionamento 1 para Muitos
         /// </summary>
-        public Conferente Conferente { get; set; }
-
-        public ICollection<Produto> produtos { get; set; } = new List<Produto>();
-
+        public Conferente Conferente { get; set; }  
+        
+        public virtual IEnumerable<Produto> produtos {get; set; }
+       
     }
 
 
@@ -80,6 +73,16 @@ namespace GestaoLogistica.Models
         Geladeira = 1,        
         Fogao = 2,
         Microondas = 3
+
+    }
+
+    public enum TipoEntSai
+    {
+
+
+        Entrada = 1,
+        Saida = 2
+        
 
     }
 }

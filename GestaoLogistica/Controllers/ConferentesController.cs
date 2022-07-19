@@ -6,6 +6,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GestaoLogistica.Controllers
 {
+    /// <summary>
+    /// Authorize para limitar  a acesso do usuario
+    /// </summary>
     [Authorize]
     public class ConferentesController : Controller
     {
@@ -24,6 +27,12 @@ namespace GestaoLogistica.Controllers
                           Problem("Entity set 'ApplicationDbContext.Conferentes'  is null.");
         }
 
+
+        /// <summary>
+        /// Metodo Get para Mostrar  os Detalhes dos conferentes cadastrados
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<IActionResult> Details(Guid? id)
         {
             if (id == null || _context.Conferentes == null)
@@ -42,12 +51,22 @@ namespace GestaoLogistica.Controllers
         }
 
        
+        /// <summary>
+        /// Get do Creat
+        /// </summary>
+        /// <returns></returns>
         public IActionResult Create()
         {
             return View();
         }
 
       
+
+        /// <summary>
+        /// Metodo Post para Criação do Cadastro do USUARIO
+        /// </summary>
+        /// <param name="conferente"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Conferente conferente)
@@ -62,7 +81,12 @@ namespace GestaoLogistica.Controllers
                 return View(conferente);
         }
 
-      
+        
+        /// <summary>
+        /// Metodo Get para Pegar o usuario pelo id e fazer a edição
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<IActionResult> Edit(Guid? id)
         {
             if (id == null || _context.Conferentes == null)
@@ -79,6 +103,13 @@ namespace GestaoLogistica.Controllers
         }
 
         
+
+        /// <summary>
+        /// Metodo Post para fazer   edição do usuario cadastrado
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="conferente"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Guid id, Conferente conferente)
@@ -86,11 +117,7 @@ namespace GestaoLogistica.Controllers
             if (id != conferente.Id)
             {
                 return NotFound();
-            }
-
-
-            if (ModelState.IsValid)
-            {
+            }         
 
                 try
                 {
@@ -109,17 +136,17 @@ namespace GestaoLogistica.Controllers
                     }
                 }
                 return RedirectToAction(nameof(Index));
-            }
-            else
-            {
+                        
                 return View(conferente);
-            }
-          
             
-            
+                    
         }
 
-        
+        /// <summary>
+        /// Metodo  Get para Editar o usuario
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<IActionResult> Delete(Guid? id)
         {
             if (id == null || _context.Conferentes == null)
@@ -138,6 +165,11 @@ namespace GestaoLogistica.Controllers
         }
 
         
+        /// <summary>
+        /// Metodo Post para Verificar se o usuario Existe pelo a Id e confirmar a deleção
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
@@ -156,6 +188,12 @@ namespace GestaoLogistica.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+
+        /// <summary>
+        /// Booleano para verificar o usuario existe
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         private bool ConferenteExists(Guid id)
         {
           return (_context.Conferentes?.Any(e => e.Id == id)).GetValueOrDefault();

@@ -2,16 +2,20 @@
 
 @{
     ViewData["Title"] = "Index";
+      <img src="../../dist/img/log.png" />
 }
 
 
 
 
-   <p><a asp-action="Create" button type="button" class="btn btn-info">Conferir Nova Carga</a></p> 
+  <hr />
 
 <table class="table table-dark table-hover table table-sm">
+    
     <thead>
+      
         <tr>
+             
             <th>
                 @Html.DisplayNameFor(model => model.TipoOperacao)
             </th>
@@ -34,6 +38,7 @@
                 @Html.DisplayNameFor(model => model.Cubagem)
                
             </th>
+            
              
             <th>
                 @Html.DisplayNameFor(model => model.Conferente)
@@ -43,6 +48,7 @@
     </thead>
     <tbody>
 @foreach (var item in Model) {
+    
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.TipoOperacao)
@@ -66,6 +72,7 @@
                 @Html.DisplayFor(modelItem => item.Cubagem ) M³
             </td>
             
+            
             <td>
                 @Html.DisplayFor(modelItem => item.Conferente.Nome)
             </td>
@@ -77,4 +84,6 @@
         </tr>
 }
     </tbody>
+    
 </table>
+ <p><a asp-action="Create" button type="button" class="btn btn-info">Conferir Nova Carga</a></p> 

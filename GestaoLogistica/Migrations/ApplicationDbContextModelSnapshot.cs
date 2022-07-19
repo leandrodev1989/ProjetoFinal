@@ -88,9 +88,6 @@ namespace GestaoLogistica.Migrations
                     b.Property<int>("QtdCaixas")
                         .HasColumnType("int");
 
-                    b.Property<int>("Saida")
-                        .HasColumnType("int");
-
                     b.Property<int>("TipoOperacao")
                         .HasColumnType("int");
 
@@ -223,6 +220,9 @@ namespace GestaoLogistica.Migrations
                         .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
+
+                    b.Property<int>("Saida")
+                        .HasColumnType("int");
 
                     b.Property<decimal>("Valor")
                         .HasColumnType("decimal(18,2)");

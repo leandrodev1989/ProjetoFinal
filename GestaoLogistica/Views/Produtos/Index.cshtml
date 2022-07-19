@@ -2,22 +2,22 @@
 
 @{
     ViewData["Title"] = "Index";
+     <img src="../../dist/img/log.png" />
 }
 
 
+<hr />
 
-<p>
-    <a asp-action="Create" button type="button" class="btn btn-info">Cadastrar Novo Produto</a>
-</p>
 <table class="table table-dark table-hover table table-sm">
     <thead>
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Nome)
             </th>
-            <th>
+             <th>
                 @Html.DisplayNameFor(model => model.Descricao)
             </th>
+           
             <th>
                 @Html.DisplayNameFor(model => model.Estoque)
             </th>
@@ -45,6 +45,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Descricao)
             </td>
+           
             <td>
                 @Html.DisplayFor(modelItem => item.Estoque)
             </td>
@@ -69,3 +70,6 @@
 }
     </tbody>
 </table>
+<p>
+    <a asp-action="Create" button type="button" class="btn btn-info">Cadastrar Novo Produto</a>
+</p>
